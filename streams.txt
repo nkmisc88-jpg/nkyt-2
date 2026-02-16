@@ -1,7 +1,10 @@
-# YouTube Live Streams - Using Video IDs (more reliable)
+# YouTube Live Streams - Using Channel URLs (Auto-finds live stream)
+
 # Arise News
-https://www.youtube.com/watch?v=x4wL-fWyhI0
+https://www.youtube.com/@AriseNewsChannel/live
+
 # Channels TV
-https://www.youtube.com/watch?v=W8nThq62Vb4
+https://www.youtube.com/@channelstv/live
+
 # News Central TV
-https://www.youtube.com/watch?v=HblKKdGhxpo
+https://www.youtube.com/@NewsCentralTV/live
