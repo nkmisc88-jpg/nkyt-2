@@ -8,7 +8,7 @@ on:
   push:
     paths:
       - 'streams.txt'
-      - '.github/workflows/live-m3u8.yml'
+      - '.github/workflows/main.yml'
 
 permissions:
   contents: write
@@ -48,19 +48,22 @@ EOF
           echo "🎬 Generating playlist..."
           
           # Create playlist header
-          cat > streams.m3u8 << EOF
+          cat > streams.m3u8 << 'EOF'
 #EXTM3U
 #EXT-X-VERSION:3
-# Generated: $(date -u)
-# Streams: $(grep -v "^#" streams.txt | grep -c "^" || echo "0")
 EOF
+          echo "# Generated: $(date -u)" >> streams.m3u8
+          TOTAL_STREAMS=$(grep -v "^#" streams.txt | grep -c "^" || echo "0")
+          echo "# Total streams: $TOTAL_STREAMS" >> streams.m3u8
+          echo "" >> streams.m3u8
 
           ACTIVE=0
           TOTAL=0
           
-          while IFS= read -r line; do
+          while IFS= read -r line || [ -n "$line" ]; do
+            # Skip comments and empty lines
             [[ "$line" =~ ^#.*$ ]] && continue
-            [[ -z "$line" ]] && continue
+            [[ -z "${line// }" ]] && continue
             
             URL=$(echo "$line" | grep -o 'https\?://[^ ]*' | head -1)
             [ -z "$URL" ] && continue
@@ -93,16 +96,9 @@ EOF
                 fi
               else
                 echo "  ⚠️ OFFLINE: $TITLE"
-                echo "" >> streams.m3u8
-                echo "#EXTINF:-1,$CHANNEL (Offline)" >> streams.m3u8
-                echo "# Stream offline - $URL" >> streams.m3u8
               fi
             else
               echo "  ❌ Failed to fetch"
-              CHANNEL=$(echo "$URL" | grep -o '@[^/]*' | tr -d '@' || echo "Unknown")
-              echo "" >> streams.m3u8
-              echo "#EXTINF:-1,$CHANNEL (Unavailable)" >> streams.m3u8
-              echo "# Failed to fetch: $URL" >> streams.m3u8
             fi
           done < streams.txt
           
@@ -122,8 +118,11 @@ EOF
           echo ""
           echo "📄 Generated playlist:"
           echo "====================="
-          head -20 streams.m3u8
-          echo "..."
+          if [ -f "streams.m3u8" ]; then
+            head -20 streams.m3u8
+          else
+            echo "❌ streams.m3u8 not found"
+          fi
 
       - name: Commit and push
         env:
@@ -132,13 +131,19 @@ EOF
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
-          git add streams.m3u8
-          
-          if git diff --staged --quiet; then
-            echo "ℹ️ No changes"
-            exit 0
+          if [ -f "streams.m3u8" ]; then
+            git add streams.m3u8
+            
+            if git diff --staged --quiet; then
+              echo "ℹ️ No changes to commit"
+              exit 0
+            fi
+            
+            git commit -m "🔄 Update M3U8 [$(date -u +%H:%M)]"
+            git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+            git push origin HEAD:${GITHUB_REF#refs/heads/}
+            echo "✅ Successfully pushed updates"
+          else
+            echo "❌ streams.m3u8 not found, nothing to commit"
+            exit 1
           fi
-          
-          git commit -m "🔄 Update M3U8 [$(date -u +%H:%M)]"
-          git push
-          echo "✅ Pushed"
