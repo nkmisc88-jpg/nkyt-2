@@ -1,15 +1,43 @@
+name: Update YouTube Live M3U8 Playlist
+permissions:
+  contents: write
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - 'streams.txt'
+      - '.github/workflows/*.yml'
+
+jobs:
+  update-playlist:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq ffmpeg
+          pip install --upgrade pip
+          pip install --upgrade yt-dlp
+          yt-dlp --version
+          ffmpeg -version | head -n1
+
       - name: Generate M3U8 playlist
         id: generate
         run: |
           echo "🎬 Generating YouTube Live M3U8 Playlist..."
           
-          # Check if streams.txt exists
           if [ ! -f "streams.txt" ]; then
             echo "❌ streams.txt not found!"
             exit 1
           fi
           
-          # Create playlist file
           echo "#EXTM3U" > streams.m3u8
           echo "#EXT-X-VERSION:3" >> streams.m3u8
           echo "# Auto-generated YouTube Live M3U8 Playlist" >> streams.m3u8
@@ -19,49 +47,34 @@
           ACTIVE_STREAMS=0
           TOTAL_STREAMS=0
           
-          # Read streams.txt
           while IFS= read -r line || [ -n "$line" ]; do
-            # Skip comments and empty lines
             [[ "$line" =~ ^#.*$ ]] && continue
             [[ -z "${line// }" ]] && continue
             
-            # Extract URL
             url=$(echo "$line" | grep -o 'https\?://[^ ]*' | head -1)
             
             if [ -n "$url" ]; then
               TOTAL_STREAMS=$((TOTAL_STREAMS + 1))
               echo ""
-              echo "🔍 [$TOTAL_STREAMS] Checking: $url"
+              echo "🔍 Checking: $url"
               
-              # Create a temp file for errors
-              ERROR_LOG=$(mktemp)
-              
-              # Try to get video info with a longer timeout and follow redirects
-              if info=$(yt-dlp --socket-timeout 30 --geo-bypass -J "$url" 2>"$ERROR_LOG"); then
-                echo "  ✅ Successfully fetched info."
+              if info=$(yt-dlp --socket-timeout 30 --geo-bypass -J "$url" 2>/dev/null); then
                 title=$(echo "$info" | jq -r '.title // "Unknown Stream"')
                 channel=$(echo "$info" | jq -r '.channel // "YouTube"')
                 is_live=$(echo "$info" | jq -r '.is_live // false')
                 duration=$(echo "$info" | jq -r '.duration // 0')
-                webpage_url=$(echo "$info" | jq -r '.webpage_url // ""')
                 
-                # Use the webpage URL for the stream if available (more reliable)
-                stream_url="${webpage_url:-$url}"
-                
-                # Check if live (live flag OR duration 0 for 24/7 streams)
                 if [ "$is_live" = "true" ] || [ "$duration" = "null" ] || [ "$duration" = "0" ]; then
                   echo "  ✅ Stream is LIVE!"
                   ACTIVE_STREAMS=$((ACTIVE_STREAMS + 1))
                   channel_id=$(echo "$channel" | tr -d ' ' | tr -cd '[:alnum:]')
                   
-                  # Try to get the direct stream URL (optional, but better for playability)
-                  direct_url=$(yt-dlp --socket-timeout 15 -g -f "best" "$stream_url" 2>/dev/null | head -1)
-                  final_url="${direct_url:-$stream_url}"
+                  direct_url=$(yt-dlp --socket-timeout 15 -g -f "best" "$url" 2>/dev/null | head -1)
+                  final_url="${direct_url:-$url}"
                   
                   echo "" >> streams.m3u8
                   echo "#EXTINF:-1 tvg-id=\"${channel_id}.yt\" group-title=\"News\",${title} (Live)" >> streams.m3u8
                   echo "$final_url" >> streams.m3u8
-                  echo "  ✅ Added to playlist"
                 else
                   echo "  ⚠️  Stream is not live"
                   channel_id=$(echo "$channel" | tr -d ' ' | tr -cd '[:alnum:]')
@@ -70,33 +83,35 @@
                   echo "# Stream currently unavailable" >> streams.m3u8
                 fi
               else
-                echo "  ❌ yt-dlp failed to fetch info."
-                echo "  🔍 Error details:"
-                head -10 "$ERROR_LOG" | sed 's/^/    /'
-                
-                # Add a placeholder for the failed URL
+                echo "  ❌ Failed to fetch info"
                 channel_name=$(echo "$url" | grep -o '@[^/]*' | tr -d '@' || echo "Unknown")
                 echo "" >> streams.m3u8
-                echo "#EXTINF:-1 tvg-id=\"${channel_name}.yt\" group-title=\"News\",${channel_name} (Error - check logs)" >> streams.m3u8
+                echo "#EXTINF:-1 tvg-id=\"${channel_name}.yt\" group-title=\"News\",${channel_name} (Error)" >> streams.m3u8
                 echo "# Failed to fetch info for: $url" >> streams.m3u8
               fi
-              
-              rm -f "$ERROR_LOG"
             fi
           done < streams.txt
           
-          # Add summary
           echo "" >> streams.m3u8
-          echo "# ================================" >> streams.m3u8
-          echo "# SUMMARY" >> streams.m3u8
-          echo "# ================================" >> streams.m3u8
-          echo "# Total streams configured: $TOTAL_STREAMS" >> streams.m3u8
+          echo "# Total streams: $TOTAL_STREAMS" >> streams.m3u8
           echo "# Active live streams: $ACTIVE_STREAMS" >> streams.m3u8
           echo "# Last updated: $(date -u '+%Y-%m-%d %H:%M UTC')" >> streams.m3u8
           
           echo "active=$ACTIVE_STREAMS" >> $GITHUB_OUTPUT
           echo "total=$TOTAL_STREAMS" >> $GITHUB_OUTPUT
-            git push
+
+      - name: Commit and push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add streams.m3u8 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m "🔄 Update live playlists - $(date -u '+%Y-%m-%d %H:%M UTC')"
+            git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+            git push origin HEAD:${GITHUB_REF#refs/heads/}
+            echo "✅ Successfully pushed changes."
           else
-            echo "No changes to commit"
+            echo "ℹ️ No changes to commit."
           fi
