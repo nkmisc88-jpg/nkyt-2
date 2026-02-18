@@ -1,83 +1,104 @@
-      - name: Generate M3U8 playlist with cookies
+name: YouTube Live M3U8 Generator
+run-name: Generate playlist with cookies 🎬
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/30 * * * *'
+  push:
+    paths:
+      - 'streams.txt'
+      - '.github/workflows/main.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install yt-dlp
         run: |
-          echo "🎬 Generating playlist with cookies..."
-          
-          # Create playlist header
+          pip install --upgrade yt-dlp
+          echo "yt-dlp version: $(yt-dlp --version)"
+
+      - name: Create cookies file
+        env:
+          COOKIES: ${{ secrets.COOKIES_TXT }}
+        run: |
+          if [ -n "$COOKIES" ]; then
+            echo "$COOKIES" > cookies.txt
+            echo "✅ Cookies file created"
+          else
+            echo "⚠️ No cookies secret found"
+          fi
+
+      - name: Generate playlist
+        run: |
           echo "#EXTM3U" > streams.m3u8
           echo "# Generated: $(date -u)" >> streams.m3u8
-          echo "# Using authenticated YouTube access" >> streams.m3u8
           echo "" >> streams.m3u8
-          
+
           TOTAL=0
           ACTIVE=0
-          
-          while IFS= read -r line || [ -n "$line" ]; do
-            # Skip comments and empty lines
+
+          while read line; do
             [[ "$line" =~ ^#.*$ ]] && continue
-            [[ -z "${line// }" ]] && continue
-            
+            [[ -z "$line" ]] && continue
+
             URL=$(echo "$line" | grep -o 'https\?://[^ ]*' | head -1)
             [ -z "$URL" ] && continue
-            
+
             TOTAL=$((TOTAL + 1))
             echo ""
-            echo "📺 [$TOTAL] Processing: $URL"
-            
-            # Extract channel name
+            echo "📺 [$TOTAL] $URL"
+
             NAME=$(echo "$URL" | grep -o '@[^/]*' | tr -d '@' || echo "Channel $TOTAL")
-            
+
             STREAM_URL=""
-            
-            # Try with cookies
+
             if [ -f "cookies.txt" ]; then
-              echo "  🔑 Using cookie authentication..."
-              
-              # First, get the video ID from the URL
+              echo "  🔑 Using cookies..."
               VIDEO_ID=$(yt-dlp --cookies cookies.txt --get-id "$URL" 2>/dev/null)
               
               if [ -n "$VIDEO_ID" ]; then
-                echo "  📺 Video ID: $VIDEO_ID"
-                
-                # Try format 301 (1080p) - this worked in your local test
-                STREAM_URL=$(yt-dlp --cookies cookies.txt -f 301 -g "https://youtube.com/watch?v=$VIDEO_ID" 2>/dev/null | head -1)
-                
-                # If 301 fails, try format 300 (720p)
-                if [ -z "$STREAM_URL" ]; then
-                  STREAM_URL=$(yt-dlp --cookies cookies.txt -f 300 -g "https://youtube.com/watch?v=$VIDEO_ID" 2>/dev/null | head -1)
-                fi
-                
-                # If still no URL, try best format
-                if [ -z "$STREAM_URL" ]; then
-                  STREAM_URL=$(yt-dlp --cookies cookies.txt -f best -g "https://youtube.com/watch?v=$VIDEO_ID" 2>/dev/null | head -1)
-                fi
+                for fmt in 301 300 best; do
+                  STREAM_URL=$(yt-dlp --cookies cookies.txt -f $fmt -g "https://youtube.com/watch?v=$VIDEO_ID" 2>/dev/null | head -1)
+                  [ -n "$STREAM_URL" ] && break
+                done
               fi
             fi
-            
-            # Add to playlist
+
             if [ -n "$STREAM_URL" ]; then
-              echo "  ✅ Got direct stream URL!"
+              echo "  ✅ Got direct URL"
               ACTIVE=$((ACTIVE + 1))
               echo "" >> streams.m3u8
-              echo "#EXTINF:-1,$NAME (Live - Direct)" >> streams.m3u8
+              echo "#EXTINF:-1,$NAME (Live)" >> streams.m3u8
               echo "$STREAM_URL" >> streams.m3u8
             else
-              echo "  ⚠️ Using channel URL as fallback"
+              echo "  ⚠️ Using fallback URL"
               echo "" >> streams.m3u8
-              echo "#EXTINF:-1,$NAME (Live - via YouTube)" >> streams.m3u8
+              echo "#EXTINF:-1,$NAME (via YouTube)" >> streams.m3u8
               echo "$URL" >> streams.m3u8
             fi
-            
+
             sleep 1
-            
+
           done < streams.txt
-          
-          # Add summary
+
           echo "" >> streams.m3u8
-          echo "# Summary: $ACTIVE/$TOTAL direct streams" >> streams.m3u8
-          echo "# Updated: $(date -u)" >> streams.m3u8
-          
-          # Clean up
+          echo "# Summary: $ACTIVE/$TOTAL direct" >> streams.m3u8
           rm -f cookies.txt
-          
-          echo ""
-          echo "📊 Summary: $ACTIVE/$TOTAL streams have direct URLs"
+
+      - name: Commit and push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add streams.m3u8
+          git diff --staged --quiet || git commit -m "Update playlist"
+          git pull --rebase origin main || true
+          git push
