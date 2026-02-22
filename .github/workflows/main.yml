@@ -1,10 +1,10 @@
 name: YouTube Live M3U8 Generator
-run-name: Generate playlist with cookies 🎬
+run-name: Generate playlist with WARP 🎬
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */6 * * *'  # Every 6 hours (safer for rate limits)
+    - cron: '0 */6 * * *'  # Run every 6 hours (safer for rate limits)
   push:
     paths:
       - 'streams.txt'
@@ -25,6 +25,37 @@ jobs:
           pip install --upgrade pip yt-dlp
           echo "✅ yt-dlp: $(yt-dlp --version)"
 
+      - name: Setup Cloudflare WARP
+        run: |
+          echo "🌐 Setting up Cloudflare WARP..."
+          
+          # Install wireguard-tools
+          sudo apt-get update
+          sudo apt-get install -y wireguard-tools openresolv
+          
+          # Install wgcf
+          curl -fsSL https://github.com/ViRb3/wgcf/releases/download/v2.2.22/wgcf_2.2.22_linux_amd64 -o wgcf
+          chmod +x wgcf
+          sudo mv wgcf /usr/local/bin/
+          
+          # Register WARP account
+          wgcf register --accept-tos
+          wgcf generate
+          
+          # Fix WireGuard config for GitHub Actions (no IPv6)
+          sed -i 's/AllowedIPs = 0.0.0.0\/0,::\/0/AllowedIPs = 0.0.0.0\/0/' wgcf-profile.conf
+          sed -i '/Address = fd/d' wgcf-profile.conf
+          
+          # Start WireGuard
+          sudo wg-quick up ./wgcf-profile.conf
+          
+          # Verify WARP connection
+          echo "🔍 Checking WARP IP..."
+          sleep 5
+          curl -s https://cloudflare.com/cdn-cgi/trace | grep ip
+          
+          echo "✅ WARP connected"
+
       - name: Create cookies file
         env:
           COOKIES: ${{ secrets.COOKIES_TXT }}
@@ -43,15 +74,18 @@ jobs:
           import time
           import random
           import re
+          import os
           from datetime import datetime, timezone
 
           def get_stream_url(url, cookies_file):
-              ydl_opts = {
+              ydl_opts_base = {
                   'cookies': cookies_file,
                   'quiet': True,
                   'no_warnings': True,
                   'socket_timeout': 30,
                   'extract_flat': False,
+                  # Use IPv4 only (WARP handles routing)
+                  'source_address': '0.0.0.0',
               }
               
               for attempt in range(5):
@@ -60,36 +94,80 @@ jobs:
                   time.sleep(delay)
                   
                   try:
-                      with yt_dlp.YoutubeDL({**ydl_opts, 'get_id': True}) as ydl:
+                      # Get video ID
+                      with yt_dlp.YoutubeDL({**ydl_opts_base, 'get_id': True}) as ydl:
                           info = ydl.extract_info(url, download=False)
                           if not info:
+                              print("  ⚠️ No info returned")
                               continue
                           
                           video_id = info.get('id')
                           if not video_id:
+                              print("  ⚠️ No video ID found")
                               continue
                           
                           print(f"  ✅ Got video ID: {video_id}")
+                          
+                          # Check if live
+                          if not info.get('is_live'):
+                              print(f"  ⚠️ Channel is not currently live")
+                              return None, None
+                          
                           time.sleep(5)
                           
-                          # Get direct URL
-                          with yt_dlp.YoutubeDL({**ydl_opts, 'format': 'best[height<=1080]/best'}) as ydl2:
+                          # Get direct stream URL
+                          format_opts = {
+                              **ydl_opts_base,
+                              'format': 'best[height<=1080][protocol*=m3u8]/best[protocol*=m3u8]/best',
+                          }
+                          
+                          with yt_dlp.YoutubeDL(format_opts) as ydl2:
                               info2 = ydl2.extract_info(f"https://youtube.com/watch?v={video_id}", download=False)
                               if info2 and 'url' in info2:
                                   return info2['url'], info2.get('title', 'Unknown')
                               
+                              # Try formats explicitly
+                              formats = info2.get('formats', []) if info2 else []
+                              for fmt in formats:
+                                  if fmt.get('protocol') in ['m3u8', 'm3u8_native']:
+                                      return fmt['url'], info2.get('title', 'Unknown')
+                              
                   except Exception as e:
-                      print(f"  ❌ Error: {str(e)[:100]}")
-                      if 'rate' in str(e).lower() or '429' in str(e):
+                      error_str = str(e)
+                      print(f"  ❌ Error: {error_str[:150]}")
+                      
+                      if 'rate' in error_str.lower() or '429' in error_str:
                           print("  ⚠️ Rate limited - increasing delay")
+                      elif 'bot' in error_str.lower():
+                          print("  ⚠️ Bot detection triggered - WARP may not be routing properly")
+                          # Check IP
+                          try:
+                              import urllib.request
+                              with urllib.request.urlopen('https://cloudflare.com/cdn-cgi/trace', timeout=10) as resp:
+                                  print(f"  🔍 Current IP info: {resp.read().decode()[:200]}")
+                          except:
+                              pass
               
               return None, None
 
-          # Main
+          # Main execution
+          if not os.path.exists('streams.txt'):
+              print("❌ streams.txt not found")
+              exit(1)
+
           with open('streams.txt', 'r') as f:
               lines = [l.strip() for l in f if l.strip() and not l.startswith('#')]
 
-          m3u8 = ["#EXTM3U", f"# Generated: {datetime.now(timezone.utc).isoformat()}", ""]
+          if not lines:
+              print("⚠️ No streams found in streams.txt")
+              exit(0)
+
+          m3u8 = [
+              "#EXTM3U",
+              f"# Generated: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}",
+              f"# Total channels: {len(lines)}",
+              ""
+          ]
 
           total = active = 0
 
@@ -101,26 +179,27 @@ jobs:
               url = url_match.group()
               total += 1
               
-              # Extract name from @handle or use default
+              # Extract name from @handle or URL
               name_match = re.search(r'@([^/]+)', url)
               name = name_match.group(1) if name_match else f"Channel {total}"
               
-              print(f"\n📺 [{total}] Processing: {name}")
+              print(f"\n📺 [{total}/{len(lines)}] Processing: {name}")
+              print(f"    URL: {url[:80]}...")
               
               stream_url, title = get_stream_url(url, 'cookies.txt')
               
               if stream_url:
                   active += 1
-                  print(f"  ✅ Direct stream acquired!")
+                  print(f"  ✅ SUCCESS: Direct stream acquired")
                   m3u8.extend([
-                      f"#EXTINF:-1 tvg-name=\"{name}\" group-title=\"YouTube Live\",{name} (Live)",
+                      f"#EXTINF:-1 tvg-name=\"{name}\" group-title=\"YouTube Live\" tvg-logo=\"\",{name} (Live)",
                       stream_url,
                       ""
                   ])
               else:
-                  print(f"  ⚠️ Using fallback URL")
+                  print(f"  ⚠️ FAILED: Using fallback URL")
                   m3u8.extend([
-                      f"#EXTINF:-1 tvg-name=\"{name}\" group-title=\"YouTube Live\",{name} (YouTube)",
+                      f"#EXTINF:-1 tvg-name=\"{name}\" group-title=\"YouTube Live\" tvg-logo=\"\",{name} (Offline/YouTube)",
                       url,
                       ""
                   ])
@@ -128,38 +207,56 @@ jobs:
               # Cooldown between channels (skip last)
               if total < len(lines):
                   cooldown = random.randint(180, 300)
-                  print(f"  ⏱️ Cooldown: {cooldown}s")
+                  print(f"  ⏱️ Cooldown: {cooldown}s before next channel...")
                   time.sleep(cooldown)
 
           m3u8.extend([
-              f"# Summary: {active}/{total} direct streams",
-              f"# Updated: {datetime.now(timezone.utc).isoformat()}"
+              f"# Summary: {active}/{total} direct streams active",
+              f"# Updated: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}"
           ])
 
           with open('streams.m3u8', 'w') as f:
               f.write('\n'.join(m3u8))
 
-          print(f"\n📊 SUMMARY: {active}/{total} direct streams")
+          print(f"\n{'='*50}")
+          print(f"📊 FINAL SUMMARY: {active}/{total} streams with direct URLs")
+          print(f"{'='*50}")
+
           PYTHON_EOF
 
           python generate.py
+
+      - name: Show playlist preview
+        run: |
+          echo ""
+          echo "📄 Generated streams.m3u8:"
+          echo "=========================="
+          head -30 streams.m3u8
+          echo "..."
+          echo "=========================="
+          wc -l streams.m3u8
 
       - name: Cleanup & Commit
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          rm -f cookies.txt generate.py
+          # Cleanup sensitive files
+          rm -f cookies.txt generate.py wgcf-profile.conf wgcf-account.toml
+          sudo wg-quick down wgcf-profile.conf 2>/dev/null || true
           
+          # Git config
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
           git add streams.m3u8
           
           if git diff --cached --quiet; then
-            echo "ℹ️ No changes"
+            echo "ℹ️ No changes to commit"
             exit 0
           fi
           
-          git commit -m "🔄 Update playlist [$(date -u +%H:%M)] - $(grep -c '^http' streams.m3u8) streams"
-          git pull --rebase origin main
+          ACTIVE_COUNT=$(grep -c '^http' streams.m3u8 || echo "0")
+          git commit -m "🔄 Update playlist [$(date -u +%H:%M)] - ${ACTIVE_COUNT} active streams"
+          git pull --rebase origin main || true
           git push origin main
+          echo "✅ Playlist updated and pushed"
