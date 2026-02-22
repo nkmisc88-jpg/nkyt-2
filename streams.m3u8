@@ -1,33 +1,16 @@
 #EXTM3U
-<<<<<<< Updated upstream
-# Generated: 2026-02-22 22:31:18 UTC
-=======
-# Generated: 2026-02-22 22:30:22 UTC
->>>>>>> Stashed changes
+# Generated: 2026-02-22 22:40:58 UTC
 # Total channels: 5
 
-#EXTINF:-1 tvg-name="Channel1" group-title="YouTube Live",Channel1 (Live)
-https://siteproxy.chidex4k43342.workers.dev/yourtube/https://www.youtube.com/watch?v=4uHZdlX-DT4
-#EXTINF:-1 tvg-name="Channel2" group-title="YouTube Live",Channel2 (Live)
-https://siteproxy.chidex4k43342.workers.dev/yourtube/https://www.youtube.com/watch?v=b-Yzp0l8cAM
-#EXTINF:-1 tvg-name="Channel3" group-title="YouTube Live",Channel3 (Live)
-https://siteproxy.chidex4k43342.workers.dev/yourtube/https://www.youtube.com/watch?v=d4zDorDl5UE
-<<<<<<< Updated upstream
-#EXTINF:-1 tvg-name="Channel4" group-title="YouTube Live",Channel4 (Live)
-https://siteproxy.chidex4k43342.workers.dev/yourtube/https://www.youtube.com/watch?v=R2YPW8eY1O0
-#EXTINF:-1 tvg-name="Channel5" group-title="YouTube Live",Channel5 (Live)
-https://siteproxy.chidex4k43342.workers.dev/yourtube/https://www.youtube.com/watch?v=sSb1PdqwQ8k
-# Summary: 5/5 streams active
-# Updated: 2026-02-22 22:32:03 UTC
-=======
-
+#EXTINF:-1 tvg-name="AriseNewsChannel" group-title="YouTube Live",AriseNewsChannel (Live)
+https://manifest.googlevideo.com/api/manifest/hls_playlist/expire/1771821667/ei/A4abaaiALYqO2_gPorztsAQ/ip/2a09:bac5:7972:8c::e:304/id/4uHZdlX-DT4.6/itag/91/source/yt_live_broadcast/requiressl/yes/ratebypass/yes/live/1/sgoap/gir%3Dyes%3Bitag%3D139/sgovp/gir%3Dyes%3Bitag%3D160/rqh/1/hls_chunk_host/rr1---sn-vgqsrndl.googlevideo.com/xpc/EgVo2aDSNQ%3D%3D/playlist_duration/30/manifest_duration/30/bui/AVNa5-yC1KCiBUkI-g0zDfaLKeHo32jjfkVKeIhfbxC5NQqd3VqiYIUHNOwBwAUn4DS0EqwCnkN-nGLS/spc/6dlaFPDHQNmu8nvJnVeg/vprv/1/reg/0/playlist_type/DVR/initcwndbps/1977500/met/1771800068,/mh/VX/mm/44/mn/sn-vgqsrndl/ms/lva/mv/m/mvi/1/pl/42/rms/lva,lva/dover/11/pacing/0/keepalive/yes/fexp/51552689,51565116,51565681,51580968/mt/1771799551/sparams/expire,ei,ip,id,itag,source,requiressl,ratebypass,live,sgoap,sgovp,rqh,xpc,playlist_duration,manifest_duration,bui,spc,vprv,reg,playlist_type/sig/AJEij0EwRQIhAOEN_7tpjPoFYz7Wru0CRDbCBDt_ooIs2DxuSzO0Ha2sAiA2dLQHR4pU3wciPHNPYCXGukbk_o6Xh40EOaeV1n2_5Q%3D%3D/lsparams/hls_chunk_host,initcwndbps,met,mh,mm,mn,ms,mv,mvi,pl,rms/lsig/APaTxxMwRQIhANPSbsKmpKjnRU75S233VoDOOvBV9yLJ8KEtl2cg_6m9AiBfdSxET0RKQ7XSuI7fpG6r6pa8cgejvV5GKXFF0XVSLw%3D%3D/playlist/index.m3u8
+#EXTINF:-1 tvg-name="TVCNewsNigeria" group-title="YouTube Live",TVCNewsNigeria (Live)
+https://manifest.googlevideo.com/api/manifest/hls_playlist/expire/1771821679/ei/D4abadCgItHpybgP4fS10AY/ip/2a09:bac5:7972:8c::e:304/id/b-Yzp0l8cAM.3/itag/91/source/yt_live_broadcast/requiressl/yes/ratebypass/yes/live/1/sgoap/gir%3Dyes%3Bitag%3D139/sgovp/gir%3Dyes%3Bitag%3D160/rqh/1/hls_chunk_host/rr5---sn-vgqsrnds.googlevideo.com/xpc/EgVo2aDSNQ%3D%3D/bui/AVNa5-xKnLr7DvW7a6TOx2JMtOgE1N29KYF6pBOtPKHVQr24N5iffkkmxHeEg38fK19z6QPpVnLJwUHf/spc/6dlaFPYgSaIruxg8vPLk/vprv/1/playlist_type/DVR/initcwndbps/1977500/met/1771800079,/mh/9J/mm/44/mn/sn-vgqsrnds/ms/lva/mv/m/mvi/5/pl/42/rms/lva,lva/dover/11/pacing/0/keepalive/yes/fexp/51552689,51565115,51565682,51580968/mt/1771799551/sparams/expire,ei,ip,id,itag,source,requiressl,ratebypass,live,sgoap,sgovp,rqh,xpc,bui,spc,vprv,playlist_type/sig/AJEij0EwRAIgC69Ciri_xK_JZYFQaQK1pcwiKTP9h0eY2bO4cFRlADgCIAyBQeT6V7V_9lnc-t5JvfmWzu7R5TF0M_v1tu-vp7w2/lsparams/hls_chunk_host,initcwndbps,met,mh,mm,mn,ms,mv,mvi,pl,rms/lsig/APaTxxMwRQIhANs35_NJAxB_Bmk9A1anE8SzCOhpI33r33s4e4AUwu4oAiB7mZ1XMAK-2sBFWZC_H3AtBrguCiBll2zHSL2PaVtRmw%3D%3D/playlist/index.m3u8
+#EXTINF:-1 tvg-name="ChannelsTelevision" group-title="YouTube Live",ChannelsTelevision (Live)
+https://manifest.googlevideo.com/api/manifest/hls_playlist/expire/1771821687/ei/F4abaezYD8Ctir4Ph5-g4QE/ip/2a09:bac5:7972:8c::e:304/id/d4zDorDl5UE.6/itag/91/source/yt_live_broadcast/requiressl/yes/ratebypass/yes/live/1/sgoap/gir%3Dyes%3Bitag%3D139/sgovp/gir%3Dyes%3Bitag%3D160/rqh/1/hls_chunk_host/rr1---sn-vgqsrn6k.googlevideo.com/xpc/EgVo2aDSNQ%3D%3D/bui/AVNa5-xS0FdWCGUU5gcumSPiGexZzbJxUeF5Lk9VopWHb4XAx2vrmsjRDCvfPZbnVj8tvzic3GL9vcdr/spc/6dlaFE4qAtR40lY8qc_m/vprv/1/playlist_type/DVR/initcwndbps/4233750/met/1771800087,/mh/39/mm/44/mn/sn-vgqsrn6k/ms/lva/mv/m/mvi/1/pl/42/rms/lva,lva/dover/11/pacing/0/keepalive/yes/fexp/51552689,51565116,51565682,51580968/mt/1771799796/sparams/expire,ei,ip,id,itag,source,requiressl,ratebypass,live,sgoap,sgovp,rqh,xpc,bui,spc,vprv,playlist_type/sig/AJEij0EwRQIhAM7v7sOXa0UEPixE0To3Blj15z3qU0tqP_unE8nftCJ-AiByf3-eddzYEvbvfI1TjAt3Dt7PAdyxwth1XroLxh8IiA%3D%3D/lsparams/hls_chunk_host,initcwndbps,met,mh,mm,mn,ms,mv,mvi,pl,rms/lsig/APaTxxMwRgIhAJNesdc8AfzHLZQODhza6Z803yAZpsO6OmDrg5HoZ1tuAiEAzSUZ1hmKbzInguu3WHyuLtWRG1W-uSl1XyaOiEeabnc%3D/playlist/index.m3u8
 #EXTINF:-1 tvg-name="NewsCentralAfrica" group-title="YouTube Live",NewsCentralAfrica (Live)
-https://siteproxy.chidex4k43342.workers.dev/yourtube/https://www.youtube.com/watch?v=R2YPW8eY1O0
-
-#EXTINF:-1 tvg-name="NTALive" group-title="YouTube Live",NTALive (Live)
-https://siteproxy.chidex4k43342.workers.dev/yourtube/https://www.youtube.com/watch?v=sSb1PdqwQ8k
-
-
-# Summary: 5/5 streams active (proxied)
-# Updated: 2026-02-22 22:34:24 UTC
->>>>>>> Stashed changes
+https://manifest.googlevideo.com/api/manifest/hls_playlist/expire/1771821695/ei/H4abaZP0OMy0ir4PudehiQY/ip/2a09:bac5:7972:8c::e:304/id/R2YPW8eY1O0.91/itag/91/source/yt_live_broadcast/requiressl/yes/ratebypass/yes/live/1/sgoap/gir%3Dyes%3Bitag%3D139/sgovp/gir%3Dyes%3Bitag%3D160/rqh/1/hls_chunk_host/rr5---sn-vgqsrn6k.googlevideo.com/xpc/EgVo2aDSNQ%3D%3D/bui/AVNa5-xh68kcKKgOfusFWF4QhGqywKHj6Ak2KfqVYo9pRnV2gGHjebX9aqWwu8110u7VvuNYTRmE8rjs/spc/6dlaFHscMyLGM8UoDaQ6/vprv/1/reg/0/playlist_type/DVR/initcwndbps/4233750/met/1771800096,/mh/_v/mm/44/mn/sn-vgqsrn6k/ms/lva/mv/m/mvi/5/pl/42/rms/lva,lva/dover/11/pacing/0/keepalive/yes/fexp/51552689,51565116,51565681,51580968/mt/1771799796/sparams/expire,ei,ip,id,itag,source,requiressl,ratebypass,live,sgoap,sgovp,rqh,xpc,bui,spc,vprv,reg,playlist_type/sig/AJEij0EwRQIgO2PoMMikUMJkUTiAZA3zWwP98hqrlMDi1EgOnMJvdx0CIQCMp2tWTkzEbWXxDOtAmxfpKDF_IedaVMT7gyewr1jhiw%3D%3D/lsparams/hls_chunk_host,initcwndbps,met,mh,mm,mn,ms,mv,mvi,pl,rms/lsig/APaTxxMwRQIgO5piHFL0P16XgcTr2X_9ltXYHOk59cvIz07E29qQ2WsCIQDNoHelRj96psnZc7g3Y5S-YRmU1cj7-Rqc6Mg9H1ELpg%3D%3D/playlist/index.m3u8
+#EXTINF:-1 tvg-name="NTALive" group-title="YouTube Live",NTALive (YouTube)
+https://www.youtube.com/@NTALive/live
+# Summary: 4/5 streams active
+# Updated: 2026-02-22 22:41:42 UTC
