@@ -1,5 +1,5 @@
 name: YouTube Live M3U8 Generator
-run-name: Generate HD Playlist with MediaFlow Proxy 🎬
+run-name: Generate HD Playlist with Cloudflare Worker 🎬
 
 on:
   workflow_dispatch:
@@ -67,7 +67,7 @@ jobs:
           echo "$COOKIES" > cookies.txt
           echo "✅ Cookies loaded ($(wc -l < cookies.txt) lines)"
 
-      - name: Generate HD playlist with MediaFlow Proxy
+      - name: Generate HD playlist with Cloudflare Worker
         id: generate
         run: |
           cat > generate.py << 'PYTHON_EOF'
@@ -80,9 +80,10 @@ jobs:
           from datetime import datetime, timezone
 
           # ===== CONFIGURATION =====
-          # Your MediaFlow Proxy URL (via ngrok) - CONFIRMED WORKING
-          API_PASSWORD = "9UHSRMWK5H%1!"
-          PROXY_BASE = f"https://adrian-stannous-isla.ngrok-free.dev/proxy/stream?api_password={API_PASSWORD}&h_referer=https://youtube.com/&d=https://www.youtube.com/watch?v="
+          # Your Cloudflare Worker URL - REPLACE WITH YOUR ACTUAL WORKER URL
+          WORKER_URL = "https://yt-proxy.your-worker.workers.dev"
+          # Format: /@HANDLE.m3u8 or /channel/CHANNEL_ID.m3u8
+          PROXY_BASE = f"{WORKER_URL}/@"
           # =========================
 
           def get_stream_url(url, cookies_file):
@@ -173,7 +174,7 @@ jobs:
               "#EXTM3U",
               f"# Generated: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}",
               f"# Total channels: {len(lines)}",
-              f"# Proxy: MediaFlow via ngrok",
+              f"# Proxy: Cloudflare Worker",
               ""
           ]
 
@@ -188,6 +189,7 @@ jobs:
               time.sleep(random.randint(5, 10))
               stream_url, video_id = get_stream_url(line, 'cookies.txt')
               
+              # Extract channel name from URL
               name_match = re.search(r'@([^/]+)', line)
               channel_name = name_match.group(1) if name_match else f"Channel{i}"
               
@@ -211,8 +213,8 @@ jobs:
                   
                   print(f"  ✅ SUCCESS: {quality_tag} stream")
                   
-                  # Create proxied URL using MediaFlow (just pass video ID)
-                  proxied_url = PROXY_BASE + video_id
+                  # Create Cloudflare Worker URL using channel name
+                  proxied_url = PROXY_BASE + channel_name + ".m3u8"
                   
                   m3u8.append(f'#EXTINF:-1 tvg-name="{channel_name}" group-title="NIGERIA",{channel_name} (Live - {quality_tag})')
                   m3u8.append(proxied_url)
