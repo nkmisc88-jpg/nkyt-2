@@ -1,23 +1,26 @@
 #EXTM3U
-# Generated: 2026-02-23 21:35:54 UTC
+#EXT-X-VERSION:3
+# Generated: 2026-02-23 21:52:54 UTC
 # Total channels: 8
 
-#EXTINF:-1 tvg-name="AriseNewsChannel" group-title="YouTube Live",AriseNewsChannel (Live - HD)
+#EXTINF:-1 tvg-id="4uHZdlX-DT4" tvg-name="AriseNewsChannel" group-title="YouTube Live",AriseNewsChannel [1080p]
 https://siteproxy.chidex4k43342.workers.dev/yourtube/4uHZdlX-DT4
-#EXTINF:-1 tvg-name="TVCNewsNigeria" group-title="YouTube Live",TVCNewsNigeria (Live - HD)
+#EXTINF:-1 tvg-id="b-Yzp0l8cAM" tvg-name="TVCNewsNigeria" group-title="YouTube Live",TVCNewsNigeria [1080p]
 https://siteproxy.chidex4k43342.workers.dev/yourtube/b-Yzp0l8cAM
-#EXTINF:-1 tvg-name="ChannelsTelevision" group-title="YouTube Live",ChannelsTelevision (Live - HD)
+#EXTINF:-1 tvg-id="dIQNK5GYyDY" tvg-name="ChannelsTelevision" group-title="YouTube Live",ChannelsTelevision [1080p]
 https://siteproxy.chidex4k43342.workers.dev/yourtube/dIQNK5GYyDY
-#EXTINF:-1 tvg-name="NewsCentralAfrica" group-title="YouTube Live",NewsCentralAfrica (Live - HD)
+#EXTINF:-1 tvg-id="puZ8rz7_4UY" tvg-name="NewsCentralAfrica" group-title="YouTube Live",NewsCentralAfrica [480p]
 https://siteproxy.chidex4k43342.workers.dev/yourtube/puZ8rz7_4UY
-#EXTINF:-1 tvg-name="NTALive" group-title="YouTube Live",NTALive (Live - HD)
+#EXTINF:-1 tvg-id="pn0I0Hxgv3g" tvg-name="NTALive" group-title="YouTube Live",NTALive [1080p]
 https://siteproxy.chidex4k43342.workers.dev/yourtube/pn0I0Hxgv3g
-#EXTINF:-1 tvg-name="SilverbirdN24Live" group-title="YouTube Live",SilverbirdN24Live (Live - HD)
+#EXTINF:-1 tvg-id="FKQV9ArQvaM" tvg-name="SilverbirdN24Live" group-title="YouTube Live",SilverbirdN24Live [720p]
 https://siteproxy.chidex4k43342.workers.dev/yourtube/FKQV9ArQvaM
-#EXTINF:-1 tvg-name="AITLivestream1" group-title="YouTube Live",AITLivestream1 (YouTube)
+#EXTINF:-1 tvg-name="AITLivestream1" group-title="YouTube Live",AITLivestream1 [Error]
 https://www.youtube.com/@AITLivestream1/live
-#EXTINF:-1 tvg-name="VOP903FM" group-title="YouTube Live",VOP903FM (Live - HD)
+#EXTINF:-1 tvg-id="DAiqbRbwnUI" tvg-name="VOP903FM" group-title="YouTube Live",VOP903FM [720p]
 https://siteproxy.chidex4k43342.workers.dev/yourtube/DAiqbRbwnUI
 # Summary: 7/8 streams active
-# Quality: 0x1080p, 0x720p, 0x480p
-# Updated: 2026-02-23 21:37:13 UTC
+# Quality: 4x1080p, 2x720p, 1x480p, 0xOther
+# Offline: 0
+# Errors: 1
+# Updated: 2026-02-23 21:53:53 UTC
