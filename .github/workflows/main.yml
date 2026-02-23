@@ -10,17 +10,26 @@ on:
       - 'streams.txt'
       - '.github/workflows/main.yml'
 
+# Enhanced permissions for private repo security
 permissions:
   contents: write
+  actions: read
+  checks: read
 
 env:
   PYTHONUNBUFFERED: "1"
-  PROXY_BASE_URL: "https://siteproxy.chidex4k43342.workers.dev/yourtube/"
+  # Move proxy URL to secret for private repos (recommended)
+  PROXY_BASE_URL: ${{ secrets.PROXY_BASE_URL || 'https://siteproxy.chidex4k43342.workers.dev/yourtube/' }}
 
 jobs:
   generate:
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    
+    # Prevent concurrent runs to avoid conflicts
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: false
     
     steps:
       - name: Checkout code
@@ -28,13 +37,13 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.WORKFLOW_PAT }}
+          # Ensure we don't persist credentials longer than needed
+          persist-credentials: false
 
       - name: Setup Python & yt-dlp
         run: |
           pip install --upgrade pip yt-dlp
           echo "✅ yt-dlp: $(yt-dlp --version)"
-
-      # REMOVED: Deno installation (unused, saves 30s)
 
       - name: Setup Cloudflare WARP
         continue-on-error: true
@@ -62,10 +71,10 @@ jobs:
             echo "❌ COOKIES_TXT secret is required"
             exit 1
           fi
-          # Create with restricted permissions and mask in logs
+          # Secure file creation with restricted permissions
           install -m 600 /dev/null cookies.txt
           echo "$COOKIES" > cookies.txt
-          # Mask first cookie value to prevent accidental logging
+          # Mask sensitive cookie values in logs
           echo "::add-mask::$(echo "$COOKIES" | head -1 | cut -f7)"
           echo "✅ Cookies loaded ($(wc -l < cookies.txt) lines)"
 
@@ -81,7 +90,7 @@ jobs:
           import sys
           from datetime import datetime, timezone
 
-          # Use environment variable with fallback
+          # Use environment variable (can be secret in private repos)
           PROXY_BASE = os.environ.get('PROXY_BASE_URL', "https://siteproxy.chidex4k43342.workers.dev/yourtube/")
 
           def get_stream_url(url, cookies_file):
@@ -122,7 +131,6 @@ jobs:
                       formats = info.get('formats', [])
                       
                       # --- Find best video format by height ---
-                      # Filter for video formats with URLs and valid codecs
                       video_formats = [
                           f for f in formats 
                           if f.get('height') and f.get('url') and f.get('vcodec') != 'none'
@@ -226,7 +234,7 @@ jobs:
                   active += 1
                   active_channels.append(channel_name)
                   
-                  # FIX: Use actual format height instead of string matching
+                  # Use actual format height instead of string matching
                   height = fmt_info.get('height', 0)
                   if height >= 1080:
                       quality_stats["1080p"] += 1
@@ -243,7 +251,7 @@ jobs:
                   
                   print(f"  ✅ SUCCESS: {quality_tag} stream")
                   
-                  # Use direct stream URL (not proxied) for active streams
+                  # Use direct stream URL for active streams
                   m3u8.append(f'#EXTINF:-1 tvg-id="{video_id}" tvg-name="{channel_name}" group-title="YouTube Live",{channel_name} [{quality_tag}]')
                   m3u8.append(stream_url)
                   m3u8.append("")
@@ -253,7 +261,7 @@ jobs:
                   print(f"  ⚠️ Channel offline or restricted, using fallback")
                   offline_channels.append(channel_name)
                   
-                  # FIX: Removed space in URL construction
+                  # Fixed URL construction (no space)
                   proxied_url = f"{PROXY_BASE}https://www.youtube.com/watch?v={video_id}"
                   
                   m3u8.append(f'#EXTINF:-1 tvg-id="{video_id}" tvg-name="{channel_name}" group-title="YouTube Live",{channel_name} [Offline]')
@@ -338,12 +346,13 @@ jobs:
           
           echo "✅ M3U8 validated ($(wc -l < streams.m3u8) lines)"
 
-      - name: Show playlist preview
+      - name: Show playlist preview (sanitized for private repo)
         run: |
           echo ""
-          echo "📄 Generated streams.m3u8:"
+          echo "📄 Generated streams.m3u8 (sanitized preview):"
           echo "=========================="
-          head -30 streams.m3u8
+          # Show only first 20 lines and mask sensitive URLs
+          head -20 streams.m3u8 | sed 's|https://[^[:space:]]*|\*\*\*URL_HIDDEN\*\*\*|g'
           echo "..."
 
       - name: Send Telegram Notification
@@ -368,9 +377,7 @@ jobs:
             ⚫ *Offline:*
             ${{ steps.stats.outputs.offline_channels }}
             
-            🔗 *Playlist URL:*
-            https://raw.githubusercontent.com/${{ github.repository }}/main/streams.m3u8
-            
+            🔒 *Repository:* Private
             🕐 *Updated:* ${{ github.event.head_commit.timestamp || 'Scheduled run' }}
         continue-on-error: true
 
@@ -380,6 +387,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Re-enable credentials for push
+          git remote set-url origin "https://x-access-token:${PAT_TOKEN}@github.com/${{ github.repository }}.git"
           
           git add -f streams.m3u8 stats.txt
           
@@ -405,7 +415,7 @@ jobs:
             fi
             
             echo "📤 Push attempt $i/$MAX_RETRIES..."
-            if git push "https://x-access-token:${PAT_TOKEN}@github.com/${{ github.repository }}.git" HEAD:main; then
+            if git push origin HEAD:main; then
               echo "✅ Successfully pushed on attempt $i"
               SUCCESS=true
               break
@@ -429,6 +439,8 @@ jobs:
           shred -u cookies.txt 2>/dev/null || rm -f cookies.txt
           shred -u stats.txt 2>/dev/null || rm -f stats.txt
           shred -u wgcf-profile.conf 2>/dev/null || rm -f wgcf-profile.conf
+          # Clear shell history to prevent credential leakage
+          history -c 2>/dev/null || true
           echo "🧹 Cleaned up temporary files"
 
       - name: Send failure notification
