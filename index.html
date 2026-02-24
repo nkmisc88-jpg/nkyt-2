@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nigeria News Streams</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { color: #333; border-bottom: 2px solid #4CAF50; padding-bottom: 10px; }
+        .playlist-card { background: white; padding: 20px; border-radius: 8px; margin: 20px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .btn { background: #4CAF50; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px; display: inline-block; margin: 10px 0; }
+        .btn:hover { background: #45a049; }
+        code { background: #f0f0f0; padding: 10px; display: block; border-radius: 4px; margin: 10px 0; word-break: break-all; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 20px 0; }
+        .stat-box { background: #e8f5e9; padding: 15px; border-radius: 4px; text-align: center; }
+        .stat-value { font-size: 24px; font-weight: bold; color: #4CAF50; }
+        .footer { margin-top: 30px; font-size: 14px; color: #666; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🇳🇬 Nigeria News Streams</h1>
+        
+        <div class="playlist-card">
+            <h2>📋 M3U8 Playlist</h2>
+            <p>Copy this URL into any M3U8-compatible player:</p>
+            <code>https://uticap.github.io/Youtube-to-M3u8/streams.m3u8</code>
+            <a href="streams.m3u8" class="btn">▶️ Open Playlist Directly</a>
+        </div>
+        
+        <div class="playlist-card">
+            <h2>📊 Current Status</h2>
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-value">8</div>
+                    <div>Active Streams</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">8</div>
+                    <div>Total Channels</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">5</div>
+                    <div>1080p Streams</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">3</div>
+                    <div>720p Streams</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="playlist-card">
+            <h2>🎬 How to Use</h2>
+            
+            <h3>VLC Media Player</h3>
+            <ol>
+                <li>Open VLC</li>
+                <li>Press <code>Ctrl+N</code> (or <code>Cmd+N</code> on Mac)</li>
+                <li>Paste the playlist URL above</li>
+                <li>Click "Play"</li>
+            </ol>
+            
+            <h3>Streamlink (Command Line)</h3>
+            <code>streamlink --player=vlc "https://uticap.github.io/Youtube-to-M3u8/streams.m3u8" best</code>
+            
+            <h3>Mobile (Android/iOS)</h3>
+            <p>Use VLC for Android/iOS or any IPTV player that supports M3U8 playlists.</p>
+        </div>
+        
+        <div class="playlist-card">
+            <h2>📡 Live Channels</h2>
+            <p><strong>Active:</strong> AriseNewsChannel,TVCNewsNigeria,ChannelsTelevision,NewsCentralAfrica,NTALive,SilverbirdN24Live,AITLivestream1,VOP903FM</p>
+            <p><strong>Offline:</strong> </p>
+            <p><strong>Errors:</strong> </p>
+        </div>
+        
+        <div class="footer">
+            <p>🔄 Refreshes every 6 hours via GitHub Actions</p>
+            <p>📡 Hosted on GitHub Pages for reliable delivery</p>
+            <p>⏰ Last updated: $(date -u '+%Y-%m-%d %H:%M UTC')</p>
+        </div>
+    </div>
+</body>
+</html>

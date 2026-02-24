@@ -1,0 +1,5 @@
+include:
+  - "*.m3u8"
+  - "*.txt"
+mime_types:
+  m3u8: application/vnd.apple.mpegurl
