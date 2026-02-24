@@ -78,7 +78,7 @@ jobs:
           import os
           import sys
           import requests
-          from datetime import datetime, timezone
+          from datetime import datetime, timezone, timedelta
 
           def get_stream_url(url, cookies_file):
               """Get the stream URL by prioritizing highest vertical resolution."""
@@ -187,6 +187,7 @@ jobs:
               f"#EXT-X-PLAYLIST-TYPE:EVENT",
               f"# Generated: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}",
               f"# Refresh: Every 6 hours via GitHub Actions",
+              f"# GitHub Pages: https://uticap.github.io/Youtube-to-M3u8/streams.m3u8",
               f"# Total channels: {len(lines)}",
               ""
           ]
@@ -223,13 +224,11 @@ jobs:
                       quality_stats["other"] += 1
                   
                   quality_tag = fmt_info.get('quality_tag', f"{height}p")
-                  is_manifest = fmt_info.get('is_manifest', False)
                   
-                  print(f"  ✅ SUCCESS: {quality_tag} {'(HLS)' if is_manifest else '(MP4)'}")
+                  print(f"  ✅ SUCCESS: {quality_tag}")
                   
-                  # USE DIRECT STREAM URL (expires in ~6 hours, refreshed by cron)
-                  # This is the most reliable method for YouTube live streams
-                  m3u8.append(f'#EXTINF:-1 tvg-id="{video_id}" tvg-name="{channel_name}" group-title="YouTube Live",{channel_name} [{quality_tag}]')
+                  # Use direct stream URL (expires in ~6 hours, refreshed by cron)
+                  m3u8.append(f'#EXTINF:-1 tvg-id="{video_id}" tvg-name="{channel_name}" group-title="Nigeria News",{channel_name} [{quality_tag}]')
                   m3u8.append(stream_url)
                   m3u8.append("")
                   
@@ -241,25 +240,27 @@ jobs:
                   # Fallback to YouTube watch page
                   fallback_url = f"https://www.youtube.com/watch?v={video_id}"
                   
-                  m3u8.append(f'#EXTINF:-1 tvg-id="{video_id}" tvg-name="{channel_name}" group-title="YouTube Live",{channel_name} [Offline]')
+                  m3u8.append(f'#EXTINF:-1 tvg-id="{video_id}" tvg-name="{channel_name}" group-title="Nigeria News",{channel_name} [Offline]')
                   m3u8.append(fallback_url)
                   m3u8.append("")
               else:
                   # Complete failure
                   print(f"  ❌ Failed to extract any info")
                   error_channels.append(channel_name)
-                  m3u8.append(f'#EXTINF:-1 tvg-name="{channel_name}" group-title="YouTube Live",{channel_name} [Error]')
+                  m3u8.append(f'#EXTINF:-1 tvg-name="{channel_name}" group-title="Nigeria News",{channel_name} [Error]')
                   m3u8.append(line)
                   m3u8.append("")
 
           # Add summary
+          next_refresh = datetime.now(timezone.utc) + timedelta(hours=6)
           m3u8.extend([
               "",
               f"# Summary: {active}/{len(lines)} streams active",
-              f"# Quality: {quality_stats['1080p']}x1080p, {quality_stats['720p']}x720p, {quality_stats['480p']}x480p, {quality_stats['other']}xOther",
+              f"# Quality: {quality_stats['1080p']}x1080p, {quality_stats['720p']}x720p, {quality_stats['480p']}x480p",
               f"# Offline: {len(offline_channels)}",
               f"# Errors: {len(error_channels)}",
-              f"# Next refresh: {(datetime.now(timezone.utc) + __import__('datetime').timedelta(hours=6)).strftime('%Y-%m-%d %H:%M UTC')}",
+              f"# Active channels: {', '.join(active_channels) if active_channels else 'None'}",
+              f"# Next refresh: {next_refresh.strftime('%Y-%m-%d %H:%M UTC')}",
               f"# Updated: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}"
           ])
 
@@ -281,7 +282,8 @@ jobs:
           print(f"\n{'='*50}")
           print(f"📊 FINAL: {active}/{len(lines)} streams active")
           print(f"📊 Quality: 1080p:{quality_stats['1080p']} 720p:{quality_stats['720p']} 480p:{quality_stats['480p']}")
-          print(f"⏰ URLs valid until: {(datetime.now(timezone.utc) + __import__('datetime').timedelta(hours=6)).strftime('%H:%M UTC')}")
+          print(f"⏰ URLs valid until: {next_refresh.strftime('%H:%M UTC')}")
+          print(f"📁 GitHub Pages: https://uticap.github.io/Youtube-to-M3u8/streams.m3u8")
           print(f"{'='*50}")
 
           PYTHON_EOF
@@ -300,6 +302,111 @@ jobs:
           echo "active_channels=$active_channels" >> $GITHUB_OUTPUT
           echo "offline_channels=$offline_channels" >> $GITHUB_OUTPUT
           echo "error_channels=$error_channels" >> $GITHUB_OUTPUT
+
+      - name: Prepare for GitHub Pages
+        run: |
+          # Create .nojekyll to disable Jekyll processing
+          touch .nojekyll
+          
+          # Create _config.yml for proper MIME types
+          cat > _config.yml << 'EOF'
+          include:
+            - "*.m3u8"
+            - "*.txt"
+          mime_types:
+            m3u8: application/vnd.apple.mpegurl
+          EOF
+          
+          # Create a simple index.html for easy access
+          cat > index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <title>Nigeria News Streams</title>
+              <meta name="viewport" content="width=device-width, initial-scale=1">
+              <style>
+                  body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+                  .container { max-width: 800px; margin: 0 auto; }
+                  h1 { color: #333; border-bottom: 2px solid #4CAF50; padding-bottom: 10px; }
+                  .playlist-card { background: white; padding: 20px; border-radius: 8px; margin: 20px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+                  .btn { background: #4CAF50; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px; display: inline-block; margin: 10px 0; }
+                  .btn:hover { background: #45a049; }
+                  code { background: #f0f0f0; padding: 10px; display: block; border-radius: 4px; margin: 10px 0; word-break: break-all; }
+                  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 20px 0; }
+                  .stat-box { background: #e8f5e9; padding: 15px; border-radius: 4px; text-align: center; }
+                  .stat-value { font-size: 24px; font-weight: bold; color: #4CAF50; }
+                  .footer { margin-top: 30px; font-size: 14px; color: #666; text-align: center; }
+              </style>
+          </head>
+          <body>
+              <div class="container">
+                  <h1>🇳🇬 Nigeria News Streams</h1>
+                  
+                  <div class="playlist-card">
+                      <h2>📋 M3U8 Playlist</h2>
+                      <p>Copy this URL into any M3U8-compatible player:</p>
+                      <code>https://uticap.github.io/Youtube-to-M3u8/streams.m3u8</code>
+                      <a href="streams.m3u8" class="btn">▶️ Open Playlist Directly</a>
+                  </div>
+                  
+                  <div class="playlist-card">
+                      <h2>📊 Current Status</h2>
+                      <div class="stats">
+                          <div class="stat-box">
+                              <div class="stat-value">${{ steps.stats.outputs.active }}</div>
+                              <div>Active Streams</div>
+                          </div>
+                          <div class="stat-box">
+                              <div class="stat-value">${{ steps.stats.outputs.total }}</div>
+                              <div>Total Channels</div>
+                          </div>
+                          <div class="stat-box">
+                              <div class="stat-value">${{ steps.stats.outputs.quality_1080p }}</div>
+                              <div>1080p Streams</div>
+                          </div>
+                          <div class="stat-box">
+                              <div class="stat-value">${{ steps.stats.outputs.quality_720p }}</div>
+                              <div>720p Streams</div>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <div class="playlist-card">
+                      <h2>🎬 How to Use</h2>
+                      
+                      <h3>VLC Media Player</h3>
+                      <ol>
+                          <li>Open VLC</li>
+                          <li>Press <code>Ctrl+N</code> (or <code>Cmd+N</code> on Mac)</li>
+                          <li>Paste the playlist URL above</li>
+                          <li>Click "Play"</li>
+                      </ol>
+                      
+                      <h3>Streamlink (Command Line)</h3>
+                      <code>streamlink --player=vlc "https://uticap.github.io/Youtube-to-M3u8/streams.m3u8" best</code>
+                      
+                      <h3>Mobile (Android/iOS)</h3>
+                      <p>Use VLC for Android/iOS or any IPTV player that supports M3U8 playlists.</p>
+                  </div>
+                  
+                  <div class="playlist-card">
+                      <h2>📡 Live Channels</h2>
+                      <p><strong>Active:</strong> ${{ steps.stats.outputs.active_channels }}</p>
+                      <p><strong>Offline:</strong> ${{ steps.stats.outputs.offline_channels }}</p>
+                      <p><strong>Errors:</strong> ${{ steps.stats.outputs.error_channels }}</p>
+                  </div>
+                  
+                  <div class="footer">
+                      <p>🔄 Refreshes every 6 hours via GitHub Actions</p>
+                      <p>📡 Hosted on GitHub Pages for reliable delivery</p>
+                      <p>⏰ Last updated: $(date -u '+%Y-%m-%d %H:%M UTC')</p>
+                  </div>
+              </div>
+          </body>
+          </html>
+          EOF
+          
+          echo "✅ GitHub Pages files created"
 
       - name: Validate and clean M3U8
         run: |
@@ -322,6 +429,7 @@ jobs:
 
       - name: Show playlist preview (sanitized)
         run: |
+          echo ""
           echo "📄 Generated streams.m3u8:"
           echo "=========================="
           head -25 streams.m3u8 | sed 's|https://[^[:space:]]*|[STREAM_URL]|g'
@@ -340,12 +448,10 @@ jobs:
             📊 *Quality:* 1080p:${{ steps.stats.outputs.quality_1080p }} 720p:${{ steps.stats.outputs.quality_720p }} 480p:${{ steps.stats.outputs.quality_480p }}
             
             📡 *Live:* ${{ steps.stats.outputs.active_channels }}
-            ⚫ *Offline:* ${{ steps.stats.outputs.offline_channels }}
             
-            ⏰ *URLs valid for ~6 hours*
-            🔁 *Next refresh:* 6 hours
+            🌐 *GitHub Pages:*
+            https://uticap.github.io/Youtube-to-M3u8/streams.m3u8
             
-            🔒 *Repository:* Private
             🕐 *Updated:* $(date -u '+%H:%M UTC')
         continue-on-error: true
 
@@ -356,7 +462,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          git add -f streams.m3u8 stats.txt
+          # Add all generated files
+          git add -f streams.m3u8 stats.txt .nojekyll _config.yml index.html
           
           if git diff --cached --quiet; then
             echo "ℹ️ No changes"
