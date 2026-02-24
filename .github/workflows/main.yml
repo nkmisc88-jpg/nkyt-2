@@ -65,12 +65,6 @@ jobs:
                   'no_warnings': True,
                   'socket_timeout': 30,
                   'retries': 3,
-                  'extractor_args': {
-                      'youtube': {
-                          'player_client': ['web', 'android'],
-                          'player_skip': ['webpage', 'configs']
-                      }
-                  }
               }
               
               try:
@@ -81,26 +75,24 @@ jobs:
                           return None, None, None
                       
                       video_id = info.get('id')
-                      title = info.get('title', 'Unknown')
+                      if not video_id:
+                          return None, None, None
                       
                       # Check if live
                       is_live = info.get('is_live', False)
                       live_status = info.get('live_status', '')
                       if not (is_live or live_status == 'is_live'):
-                          print(f"  ⚠️ Not currently live")
-                          return None, video_id, None
+                          return video_id, "offline", info.get('title', 'Unknown')
                       
-                      # Get best format info for quality detection
+                      # Get format info for quality detection
                       formats = info.get('formats', [])
                       video_formats = [f for f in formats if f.get('height') and f.get('vcodec') != 'none']
                       
                       if video_formats:
-                          # Sort by height
                           video_formats.sort(key=lambda f: f.get('height', 0), reverse=True)
                           best_format = video_formats[0]
                           height = best_format.get('height', 0)
                           
-                          # Determine quality tag
                           if height >= 1080:
                               quality = "1080p"
                           elif height >= 720:
@@ -116,7 +108,7 @@ jobs:
                       else:
                           quality = "unknown"
                       
-                      return video_id, quality, title
+                      return video_id, quality, info.get('title', 'Unknown')
                           
               except Exception as e:
                   print(f"  ⚠️ Error: {str(e)[:100]}")
@@ -125,7 +117,7 @@ jobs:
           # Read streams.txt
           if not os.path.exists('streams.txt'):
               print("❌ streams.txt not found")
-              sys.exit(0)
+              sys.exit(1)
 
           with open('streams.txt', 'r') as f:
               lines = [l.strip() for l in f if l.strip() and not l.startswith('#')]
@@ -134,70 +126,52 @@ jobs:
               print("⚠️ No streams found")
               sys.exit(0)
 
-          # Create playlist with Streamlink-friendly format
           m3u8 = [
               "#EXTM3U",
               "#EXT-X-VERSION:3",
               f"# Generated: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}",
               f"# Total channels: {len(lines)}",
               "# Playlist optimized for Streamlink (pip install streamlink)",
-              "# Use with: streamlink --player=vlc URL best",
               ""
           ]
 
           active = 0
-          channels_info = []
-          offline = []
+          active_channels = []
+          offline_channels = []
 
           for i, line in enumerate(lines, 1):
-              print(f"\n📺 [{i}/{len(lines)}] Processing: {line}")
+              print(f"\n📺 [{i}/{len(lines)}] Processing: {line[:50]}...")
               
-              # Random delay to avoid rate limiting
-              time.sleep(random.uniform(2, 5))
+              time.sleep(random.uniform(2, 4))
               
-              # Extract channel name
               name_match = re.search(r'@([^/]+)', line)
               channel_name = name_match.group(1) if name_match else f"Channel{i}"
               channel_name = re.sub(r'[^\w\s-]', '', channel_name).strip()
               
-              # Get video info
               video_id, quality, title = get_video_info(line, 'cookies.txt')
               
               if video_id:
-                  active += 1
                   youtube_url = f"https://www.youtube.com/watch?v={video_id}"
                   
-                  # Store channel info
-                  channels_info.append({
-                      'name': channel_name,
-                      'url': youtube_url,
-                      'quality': quality or 'unknown',
-                      'title': title
-                  })
-                  
-                  # Add to playlist - Streamlink works best with standard YouTube URLs
-                  m3u8.append(f'#EXTINF:-1 tvg-id="{video_id}" tvg-name="{channel_name}" group-title="Nigeria News",{channel_name} [{quality}]')
-                  m3u8.append(youtube_url)
+                  if quality != "offline":
+                      active += 1
+                      active_channels.append(channel_name)
+                      print(f"  ✅ Added: {channel_name} [{quality}]")
+                      m3u8.append(f'#EXTINF:-1 tvg-id="{video_id}" tvg-name="{channel_name}" group-title="Nigeria News",{channel_name} [{quality}]')
+                      m3u8.append(youtube_url)
+                  else:
+                      offline_channels.append(channel_name)
+                      print(f"  ⚠️ Offline: {channel_name}")
+                      m3u8.append(f'#EXTINF:-1 tvg-name="{channel_name}" group-title="Nigeria News",{channel_name} [Offline]')
+                      m3u8.append(line)
                   m3u8.append("")
-                  
-                  print(f"  ✅ Added: {channel_name} [{quality}]")
-              else:
-                  offline.append(channel_name)
-                  # Add as offline with original URL as fallback
-                  m3u8.append(f'#EXTINF:-1 tvg-name="{channel_name}" group-title="Nigeria News",{channel_name} [Offline]')
-                  m3u8.append(line)
-                  m3u8.append("")
-                  print(f"  ⚠️ Channel offline: {channel_name}")
 
-          # Add summary
           m3u8.extend([
               "",
               f"# Summary: {active}/{len(lines)} streams active",
-              f"# Active channels: {', '.join([c['name'] for c in channels_info])}",
               f"# Updated: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}"
           ])
 
-          # Write playlist
           with open('streams.m3u8', 'w', encoding='utf-8') as f:
               f.write('\n'.join(m3u8))
 
@@ -205,8 +179,8 @@ jobs:
           with open('stats.txt', 'w') as f:
               f.write(f"active={active}\n")
               f.write(f"total={len(lines)}\n")
-              f.write(f"active_channels={','.join([c['name'] for c in channels_info])}\n")
-              f.write(f"offline_channels={','.join(offline)}\n")
+              f.write(f"active_channels={','.join(active_channels)}\n")
+              f.write(f"offline_channels={','.join(offline_channels)}\n")
 
           print(f"\n{'='*50}")
           print(f"📊 FINAL: {active}/{len(lines)} streams active")
@@ -225,62 +199,28 @@ jobs:
           echo "active_channels=$active_channels" >> $GITHUB_OUTPUT
           echo "offline_channels=$offline_channels" >> $GITHUB_OUTPUT
 
-      - name: Validate playlist
+      - name: Generate helper scripts
         run: |
-          # Remove any git conflict markers
-          sed -i '/^<<<<<<< /d' streams.m3u8 2>/dev/null || true
-          sed -i '/^=======/d' streams.m3u8 2>/dev/null || true
-          sed -i '/^>>>>>>> /d' streams.m3u8 2>/dev/null || true
-          
-          # Validate format
-          if grep -q "^#EXTM3U" streams.m3u8; then
-            echo "✅ Playlist valid: $(wc -l < streams.m3u8) lines"
-          else
-            echo "❌ Invalid playlist"
-            exit 1
-          fi
-
-      - name: Generate Streamlink helper scripts
-        run: |
-          # Create simple player script
+          # Create Streamlink player script
           cat > play_with_streamlink.sh << 'EOF'
           #!/bin/bash
-          # Simple Streamlink Player
-          # Usage: ./play_with_streamlink.sh [channel_number] [quality]
+          # Streamlink Player for Nigeria News
           
-          PLAYLIST="streams.m3u8"
-          QUALITY="${2:-best}"
+          PLAYLIST="https://raw.githubusercontent.com/uticap/Youtube-to-M3u8/main/streams.m3u8"
+          QUALITY="${1:-best}"
           
-          if [ ! -f "$PLAYLIST" ]; then
-            echo "❌ Playlist not found"
-            exit 1
-          fi
+          echo "📺 Nigeria News Streams"
+          echo "======================="
+          echo "Usage: ./play_with_streamlink.sh [quality]"
+          echo "Quality options: best, 1080p, 720p, 480p"
+          echo ""
+          echo "Available channels will be listed from the playlist"
+          echo ""
           
-          echo "📺 Available channels:"
-          grep -E "^#EXTINF" "$PLAYLIST" | nl | while read num line; do
-            channel=$(echo "$line" | sed 's/.*,//' | sed 's/ \[.*\]//')
-            echo "  $num. $channel"
-          done
-          
-          if [ -n "$1" ] && [ "$1" -ge 1 ] 2>/dev/null; then
-            CHANNEL_NUM=$1
-          else
-            echo ""
-            read -p "Select channel number: " CHANNEL_NUM
-          fi
-          
-          URL=$(grep -A1 "^#EXTINF" "$PLAYLIST" | sed -n "$((CHANNEL_NUM*2)),+1p" | grep -v "^#" | head -1)
-          
-          if [ -n "$URL" ]; then
-            echo -e "\n🎬 Playing channel $CHANNEL_NUM"
-            echo "Quality: $QUALITY"
-            streamlink --player="vlc" "$URL" "$QUALITY"
-          else
-            echo "❌ Invalid selection"
-          fi
+          streamlink --player="vlc" "$PLAYLIST" "$QUALITY"
           EOF
           
-          # Create mobile-friendly HTML player
+          # Create mobile HTML player
           cat > mobile_player.html << 'EOF'
           <!DOCTYPE html>
           <html>
@@ -288,69 +228,16 @@ jobs:
               <title>Nigeria News Streams</title>
               <meta name="viewport" content="width=device-width, initial-scale=1">
               <style>
-                  body { font-family: Arial, sans-serif; margin: 0; padding: 16px; background: #f5f5f5; }
-                  .channel { background: white; border-radius: 8px; padding: 12px; margin-bottom: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-                  .channel h3 { margin: 0 0 4px 0; color: #333; }
-                  .channel .quality { font-size: 12px; color: #666; margin-bottom: 8px; }
-                  .play-btn { background: #4CAF50; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; width: 100%; }
-                  .play-btn:hover { background: #45a049; }
-                  .offline { background: #f44336; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px; display: inline-block; }
+                  body { font-family: Arial; padding: 16px; background: #f0f0f0; }
+                  .channel { background: white; border-radius: 8px; padding: 12px; margin-bottom: 8px; }
+                  .play-btn { background: #4CAF50; color: white; border: none; padding: 10px; width: 100%; border-radius: 4px; }
               </style>
           </head>
           <body>
               <h2>🇳🇬 Nigeria News Streams</h2>
-              <p>Click play to open in VLC or your preferred player</p>
-              <div id="channels"></div>
-              
-              <script>
-                  fetch('streams.m3u8')
-                      .then(r => r.text())
-                      .then(data => {
-                          const lines = data.split('\n');
-                          const channels = [];
-                          
-                          for (let i = 0; i < lines.length; i++) {
-                              if (lines[i].startsWith('#EXTINF')) {
-                                  const info = lines[i];
-                                  const url = lines[i + 1];
-                                  if (url && !url.startsWith('#')) {
-                                      const nameMatch = info.match(/tvg-name="([^"]+)"/) || info.match(/,([^[]+)/);
-                                      const qualityMatch = info.match(/\[([^\]]+)\]/);
-                                      const name = nameMatch ? nameMatch[1].trim() : 'Channel';
-                                      const quality = qualityMatch ? qualityMatch[1] : 'unknown';
-                                      channels.push({ name, url, quality });
-                                  }
-                              }
-                          }
-                          
-                          const container = document.getElementById('channels');
-                          channels.forEach(ch => {
-                              const div = document.createElement('div');
-                              div.className = 'channel';
-                              div.innerHTML = `
-                                  <h3>${ch.name}</h3>
-                                  <div class="quality">Quality: ${ch.quality}</div>
-                                  <button class="play-btn" onclick="playStream('${ch.url}')">▶️ Play</button>
-                              `;
-                              container.appendChild(div);
-                          });
-                      });
-                  
-                  function playStream(url) {
-                      if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
-                          // Try to open in VLC on Android
-                          window.location.href = `vlc://${url}`;
-                          setTimeout(() => {
-                              // Fallback to web intent
-                              window.location.href = `intent://${url.replace(/^https?:\/\//, '')}#Intent;package=org.videolan.vlc;scheme=vlc;end;`;
-                          }, 500);
-                      } else {
-                          // On desktop, copy to clipboard
-                          navigator.clipboard.writeText(url);
-                          alert('URL copied to clipboard! Paste in VLC: ' + url);
-                      }
-                  }
-              </script>
+              <p>Playlist URL:</p>
+              <code style="word-break: break-all;">https://raw.githubusercontent.com/uticap/Youtube-to-M3u8/main/streams.m3u8</code>
+              <p>Copy this URL into VLC or any M3U8 player</p>
           </body>
           </html>
           EOF
@@ -377,48 +264,86 @@ jobs:
             
             ✅ *Active Streams:* ${{ steps.stats.outputs.active }}/${{ steps.stats.outputs.total }}
             
-            📡 *Live Channels:*
-            ${{ steps.stats.outputs.active_channels }}
+            📡 *Live Channels:* ${{ steps.stats.outputs.active_channels }}
             
-            ⚫ *Offline:*
-            ${{ steps.stats.outputs.offline_channels }}
-            
-            🔗 *Playlist URL:*
-            https://raw.githubusercontent.com/${{ github.repository }}/main/streams.m3u8
+            🔗 *Playlist URL:* https://raw.githubusercontent.com/${{ github.repository }}/main/streams.m3u8
             
             🕐 *Updated:* ${{ github.event.head_commit.timestamp || 'Scheduled run' }}
         continue-on-error: true
 
-      - name: Commit and push
+      - name: Commit and push with conflict resolution
         env:
           PAT_TOKEN: ${{ secrets.WORKFLOW_PAT }}
         run: |
+          # Configure git
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          git add streams.m3u8 play_with_streamlink.sh mobile_player.html
+          # Backup generated files
+          cp streams.m3u8 streams.m3u8.backup 2>/dev/null || true
+          cp play_with_streamlink.sh play_with_streamlink.sh.backup 2>/dev/null || true
+          cp mobile_player.html mobile_player.html.backup 2>/dev/null || true
+          cp stats.txt stats.txt.backup 2>/dev/null || true
           
+          # Get latest changes
+          echo "📥 Fetching latest changes..."
+          git fetch origin main
+          
+          # Reset to latest remote (clean slate)
+          if git rev-parse origin/main >/dev/null 2>&1; then
+            git reset --hard origin/main
+          else
+            echo "ℹ️ No remote branch yet"
+          fi
+          
+          # Restore our generated files
+          mv streams.m3u8.backup streams.m3u8 2>/dev/null || true
+          mv play_with_streamlink.sh.backup play_with_streamlink.sh 2>/dev/null || true
+          mv mobile_player.html.backup mobile_player.html 2>/dev/null || true
+          mv stats.txt.backup stats.txt 2>/dev/null || true
+          
+          # Make scripts executable
+          chmod +x play_with_streamlink.sh 2>/dev/null || true
+          
+          # Add all files
+          git add -f streams.m3u8 play_with_streamlink.sh mobile_player.html stats.txt
+          
+          # Check if there are changes
           if git diff --cached --quiet; then
             echo "ℹ️ No changes to commit"
             exit 0
           fi
           
-          git commit -m "🔄 Update playlist [$(date -u +%H:%M)]"
+          # Show what's being committed
+          echo "📝 Changes to commit:"
+          git diff --cached --name-status
           
-          # Push with retry
-          for i in {1..5}; do
-            if git pull --rebase origin main && git push "https://x-access-token:${PAT_TOKEN}@github.com/${{ github.repository }}.git" HEAD:main; then
-              echo "✅ Successfully pushed"
-              exit 0
-            fi
-            echo "⚠️ Push failed, retrying in 10s..."
-            sleep 10
-          done
-          echo "❌ Failed to push"
-          exit 1
+          # Commit
+          git commit -m "🔄 Update playlist [$(date -u +%H:%M)] - ${{ steps.stats.outputs.active }}/${{ steps.stats.outputs.total }} active"
+          
+          # Push with force (cleanest for automated workflows)
+          echo "📤 Pushing changes..."
+          if git push --force "https://x-access-token:${PAT_TOKEN}@github.com/${{ github.repository }}.git" HEAD:main; then
+            echo "✅ Successfully pushed"
+          else
+            echo "❌ Push failed"
+            exit 1
+          fi
 
       - name: Cleanup
         if: always()
         run: |
-          rm -f cookies.txt stats.txt 2>/dev/null || true
-          echo "🧹 Cleaned up"
+          rm -f cookies.txt stats.txt *.backup 2>/dev/null || true
+          echo "🧹 Cleanup complete"
+
+      - name: Send failure notification
+        if: failure()
+        uses: cbrgm/telegram-github-action@v1
+        with:
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          message: |
+            ❌ *Workflow Failed*
+            Repository: ${{ github.repository }}
+            Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        continue-on-error: true
