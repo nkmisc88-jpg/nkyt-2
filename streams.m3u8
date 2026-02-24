@@ -1,31 +1,9 @@
 #EXTM3U
 #EXT-X-VERSION:3
-# Generated: 2026-02-24 07:17:10 UTC
-# Playlist optimized for Streamlink (No Stutter)
+# Generated: 2026-02-24 09:15:19 UTC
 # Total channels: 8
-#
-# HOW TO USE:
-# 1. Install Streamlink: https://streamlink.github.io/install.html
-# 2. Play with: streamlink --player vlc 'URL' best
-# 3. Or use: streamlink --player mpv 'URL' best
+# Playlist optimized for Streamlink (pip install streamlink)
 
-#EXTINF:-1 tvg-id="4uHZdlX-DT4" tvg-name="AriseNewsChannel" group-title="YouTube Live",AriseNewsChannel [1080p60]
-https://www.youtube.com/watch?v=4uHZdlX-DT4
-#EXTINF:-1 tvg-id="b-Yzp0l8cAM" tvg-name="TVCNewsNigeria" group-title="YouTube Live",TVCNewsNigeria [1080p]
-https://www.youtube.com/watch?v=b-Yzp0l8cAM
-#EXTINF:-1 tvg-id="d4zDorDl5UE" tvg-name="ChannelsTelevision" group-title="YouTube Live",ChannelsTelevision [Fallback]
-https://www.youtube.com/watch?v=d4zDorDl5UE
-#EXTINF:-1 tvg-id="puZ8rz7_4UY" tvg-name="NewsCentralAfrica" group-title="YouTube Live",NewsCentralAfrica [480p]
-https://www.youtube.com/watch?v=puZ8rz7_4UY
-#EXTINF:-1 tvg-id="3Ifhc7UwntM" tvg-name="NTALive" group-title="YouTube Live",NTALive [1080p60]
-https://www.youtube.com/watch?v=3Ifhc7UwntM
-#EXTINF:-1 tvg-id="FKQV9ArQvaM" tvg-name="SilverbirdN24Live" group-title="YouTube Live",SilverbirdN24Live [720p]
-https://www.youtube.com/watch?v=FKQV9ArQvaM
-#EXTINF:-1 tvg-id="fNsUN-S-czg" tvg-name="AITLivestream1" group-title="YouTube Live",AITLivestream1 [1080p60]
-https://www.youtube.com/watch?v=fNsUN-S-czg
-#EXTINF:-1 tvg-id="nUkWbqzY49U" tvg-name="VOP903FM" group-title="YouTube Live",VOP903FM [720p]
-https://www.youtube.com/watch?v=nUkWbqzY49U
-# Summary: 7/8 streams active
-# Streamlink compatible: 7
-# Quality: 4x1080p, 2x720p, 1x480p
-# Updated: 2026-02-24 07:18:06 UTC
+
+# Summary: 0/8 streams active
+# Updated: 2026-02-24 09:15:53 UTC
