@@ -27,7 +27,7 @@ CHANNEL_COUNTRIES = {
     'ait': 'NG',
     'silverbird': 'NG',
     'nigerian': 'NG',
-    'nigeria': 'NG',           # CRITICAL: catches "Nigeria" in channel name
+    'nigeria': 'NG',
     'lagos': 'NG',
     'abuja': 'NG',
     'channelstv': 'NG',
@@ -50,6 +50,7 @@ CHANNEL_COUNTRIES = {
     'metro': 'GH',
     'peace': 'GH',
     'angel': 'GH',
+    'parliament': 'GH',
     
     # Default fallback
     'default': 'US'
@@ -93,7 +94,7 @@ class YouTubePlaylistGenerator:
         """Detect which country the channel belongs to based on name"""
         channel_name_lower = channel_name.lower()
         
-        # First check for explicit country names (MOST IMPORTANT)
+        # First check for explicit country names
         if 'nigeria' in channel_name_lower or 'nigerian' in channel_name_lower:
             print(f"  🌍 Found 'Nigeria' in name, using NG")
             return 'NG'
@@ -209,31 +210,32 @@ class YouTubePlaylistGenerator:
                     'last_seen': datetime.now().isoformat()
                 }
                 
-                # BETTER LIVE DETECTION
+                # MORE LENIENT LIVE DETECTION
                 is_live = False
                 live_status = info.get('live_status', '')
                 
-                # Check multiple indicators
-                if live_status == 'is_live':
+                # Check multiple indicators - be more generous
+                if live_status in ['is_live', 'is_upcoming', 'live']:
                     is_live = True
                 elif info.get('is_live'):
                     is_live = True
                 elif info.get('was_live'):
-                    is_live = False
+                    # If it was live recently, still try to get stream
+                    is_live = True
+                    print(f"  ⚠️ Was live recently, attempting to get stream anyway")
                 
-                # Also check formats for live indicators
+                # Also check formats for any live indicators
                 formats = info.get('formats', [])
+                has_any_format = len(formats) > 0
                 has_live_format = any(
-                    f.get('manifest_url') and 'live' in str(f.get('protocol', ''))
+                    f.get('manifest_url') or 'live' in str(f.get('protocol', ''))
                     for f in formats
                 )
                 
-                if has_live_format and not is_live:
+                if has_any_format and not is_live:
+                    # If there are formats, try anyway
                     is_live = True
-                
-                # Check for scheduled streams
-                if 'schedule' in str(info.get('title', '')).lower():
-                    is_live = False
+                    print(f"  ⚠️ Has formats, attempting to get stream")
                 
                 if not is_live:
                     print(f"  ⚠️ Not currently live (status: {live_status})")
@@ -334,8 +336,9 @@ class YouTubePlaylistGenerator:
             return None
     
     def generate_individual_playlists(self, channels_data):
-        """Generate individual M3U8 files for each channel with validation"""
+        """Generate individual M3U8 files for each channel with validation and preserve previous channels"""
         individual_channels = []
+        live_channels_found = False
         
         for channel in channels_data:
             channel_name = channel.get('name', 'unknown')
@@ -350,6 +353,7 @@ class YouTubePlaylistGenerator:
             is_live = channel.get('is_live', False) and channel.get('status') == 'live'
             
             if is_live:
+                live_channels_found = True
                 # Get best quality stream
                 main_stream = channel.get('streams', {}).get('hd', {})
                 if not main_stream:
@@ -409,19 +413,32 @@ class YouTubePlaylistGenerator:
 """)
                     print(f"  ⚠️ UNAVAILABLE: {filename}")
             else:
-                # Channel is offline
-                with open(filename, 'w', encoding='utf-8') as f:
-                    f.write(f"""#EXTM3U
-#EXT-X-VERSION:3
-# Channel: {channel_name}
-# ID: {channel_id}
-# Status: OFFLINE
-# Generated: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}
-
-#EXTINF:-1 tvg-name="{channel_name}",{channel_name} [OFFLINE - Click for YouTube page]
-{channel.get('channel_url', 'https://youtube.com')}
-""")
-                print(f"  ⚫ OFFLINE: {filename}")
+                # Channel is offline - keep existing file but don't add to live list
+                print(f"  ⚫ OFFLINE: {filename} (keeping existing file)")
+        
+        # If NO live channels found, try to load previous channels.json
+        if not live_channels_found:
+            print("⚠️ No live channels detected in this run")
+            try:
+                if os.path.exists(f"{self.channels_dir}/channels.json"):
+                    with open(f"{self.channels_dir}/channels.json", 'r') as f:
+                        old_data = json.load(f)
+                    if old_data.get('channels'):
+                        print(f"📋 Using {len(old_data['channels'])} channels from previous run")
+                        individual_channels = old_data['channels']
+                        
+                        # Update the M3U8 files to show OFFLINE status
+                        for ch in individual_channels:
+                            filename = ch['file']
+                            if os.path.exists(filename):
+                                with open(filename, 'r') as f:
+                                    content = f.read()
+                                if '🔴 LIVE' in content:
+                                    # Update to show offline
+                                    with open(filename, 'w', encoding='utf-8') as f:
+                                        f.write(content.replace('🔴 LIVE', '⚫ OFFLINE'))
+            except Exception as e:
+                print(f"  ⚠️ Could not load previous channels: {e}")
         
         # Save list of individual channels
         with open(f"{self.channels_dir}/channels.json", 'w') as f:
@@ -437,118 +454,148 @@ class YouTubePlaylistGenerator:
         return individual_channels
     
     def generate_channels_html(self, channels):
-        """Generate a simple HTML index page for all individual channels"""
-        html = """<!DOCTYPE html>
+        """Generate HTML index page with channels directly embedded"""
+        
+        # Build the channel list HTML
+        channel_items = ""
+        for ch in channels:
+            filename = ch['file'].replace('channels/', '')
+            country = ch.get('country', 'Unknown')
+            quality = ch.get('quality', 'Auto')
+            status = ch.get('status', 'live')
+            
+            status_icon = "🔴" if status == 'live' else "⚫"
+            status_text = "LIVE" if status == 'live' else "OFFLINE"
+            
+            channel_items += f"""
+        <div class="channel-card">
+            <div class="channel-name">{ch['name']}</div>
+            <div class="channel-country">📍 {country}</div>
+            <div class="channel-quality">{status_icon} {status_text} • {quality}</div>
+            <div>
+                <a href="{filename}" class="btn">▶️ Play</a>
+                <a href="{filename}" download class="btn btn-outline">📥 Download</a>
+            </div>
+            <div class="channel-url">
+                <small>URL: <code>../channels/{filename}</code></small>
+            </div>
+        </div>
+        """
+        
+        # If no channels, show message
+        if not channel_items:
+            channel_items = """
+        <div style="text-align: center; padding: 40px; background: #f8f9fa; border-radius: 12px;">
+            <p style="font-size: 1.2em; color: #666;">📡 No channels available at the moment</p>
+            <p style="color: #999; margin-top: 10px;">Check back after the next workflow run (every 6 hours)</p>
+        </div>
+        """
+        
+        # Complete HTML
+        html = f"""<!DOCTYPE html>
 <html>
 <head>
     <title>📺 Individual Channels</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
+        * {{ margin: 0; padding: 0; box-sizing: border-box; }}
+        body {{ 
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
-        }
-        .container { 
+        }}
+        .container {{ 
             max-width: 1200px; 
             margin: 0 auto; 
             background: white;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             overflow: hidden;
-        }
-        .header { 
+        }}
+        .header {{ 
             background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
             color: white; 
             padding: 30px; 
             text-align: center;
-        }
-        .header h1 { font-size: 2em; margin-bottom: 10px; }
-        .content { padding: 30px; }
-        .channel-grid {
+        }}
+        .header h1 {{ font-size: 2em; margin-bottom: 10px; }}
+        .content {{ padding: 30px; }}
+        .channel-grid {{
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
             margin-top: 20px;
-        }
-        .channel-card {
+        }}
+        .channel-card {{
             background: #f8f9fa;
             border-radius: 12px;
             padding: 20px;
             border-left: 4px solid #4CAF50;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             transition: transform 0.2s;
-        }
-        .channel-card:hover { transform: translateY(-2px); }
-        .channel-name {
+        }}
+        .channel-card:hover {{ transform: translateY(-2px); }}
+        .channel-name {{
             font-size: 1.2em;
             font-weight: bold;
             color: #333;
             margin-bottom: 5px;
-        }
-        .channel-country {
-            font-size: 0.85em;
+        }}
+        .channel-country {{
             color: #666;
-            margin-bottom: 10px;
-        }
-        .channel-quality {
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }}
+        .channel-quality {{
             color: #4CAF50;
             font-size: 0.9em;
             margin-bottom: 15px;
-        }
-        .btn {
+        }}
+        .btn {{
             display: inline-block;
             background: #4CAF50;
             color: white;
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 6px;
             text-decoration: none;
-            margin-right: 10px;
-            margin-bottom: 10px;
+            margin-right: 8px;
             font-size: 0.9em;
             border: none;
             cursor: pointer;
-        }
-        .btn:hover { background: #45a049; }
-        .btn-outline {
+        }}
+        .btn:hover {{ background: #45a049; }}
+        .btn-outline {{
             background: transparent;
             border: 2px solid #4CAF50;
             color: #4CAF50;
-        }
-        .btn-outline:hover {
+        }}
+        .btn-outline:hover {{
             background: #4CAF50;
             color: white;
-        }
-        .footer {
+        }}
+        .channel-url {{
+            margin-top: 10px;
+            font-size: 0.8em;
+            color: #666;
+        }}
+        .footer {{
             background: #f8f9fa;
             padding: 20px;
             text-align: center;
             color: #666;
             border-top: 1px solid #e0e0e0;
-        }
-        code {
+        }}
+        code {{
             background: #f5f5f5;
-            padding: 3px 6px;
+            padding: 2px 5px;
             border-radius: 3px;
-            font-size: 0.85em;
-        }
-        .badge {
-            display: inline-block;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 0.75em;
-            font-weight: bold;
-            background: #e3f2fd;
-            color: #1976d2;
-        }
-        .badge-ng { background: #e8f5e8; color: #2e7d32; }
-        .badge-gh { background: #fff3e0; color: #bf360c; }
-        @media (max-width: 768px) {
-            .channel-grid { grid-template-columns: 1fr; }
-        }
+            font-size: 0.9em;
+        }}
+        @media (max-width: 768px) {{
+            .channel-grid {{ grid-template-columns: 1fr; }}
+        }}
     </style>
 </head>
 <body>
@@ -566,37 +613,16 @@ class YouTubePlaylistGenerator:
                 <a href="../epg.xml" class="btn">📺 EPG Guide</a>
             </div>
             
-            <h2 style="margin-bottom: 20px;">Available Channels (""" + str(len(channels)) + """ live)</h2>
+            <h2 style="margin-bottom: 20px;">Available Channels ({len(channels)})</h2>
             <div class="channel-grid">
-"""
-        
-        for ch in channels:
-            filename = ch['file'].replace('channels/', '')
-            country = ch.get('country', 'Unknown')
-            badge_class = f"badge-{country.lower()}" if country in ['NG', 'GH'] else ""
-            html += f"""
-                <div class="channel-card">
-                    <div class="channel-name">{ch['name']}</div>
-                    <div class="channel-country"><span class="badge {badge_class}">{country}</span></div>
-                    <div class="channel-quality">🔴 LIVE • {ch['quality']}</div>
-                    <div>
-                        <a href="{filename}" class="btn">▶️ Play</a>
-                        <a href="{filename}" download class="btn btn-outline">📥 Download</a>
-                    </div>
-                    <div style="margin-top: 10px;">
-                        <small>Copy URL:</small><br>
-                        <code>../channels/{filename}</code>
-                    </div>
-                </div>"""
-        
-        html += """
+                {channel_items}
             </div>
         </div>
         
         <div class="footer">
             <p>🔄 Refreshes every 6 hours • URLs expire ~6 hours</p>
-            <p>⏰ Last updated: """ + datetime.now().strftime('%Y-%m-%d %H:%M UTC') + """</p>
-            <p>🔗 GitHub: <a href="https://github.com/uticap/Youtube-to-M3u8">uticap/Youtube-to-M3u8</a></p>
+            <p>⏰ Last updated: {datetime.now().strftime('%Y-%m-%d %H:%M UTC')}</p>
+            <p>🔗 <a href="https://github.com/uticap/Youtube-to-M3u8">GitHub Repository</a></p>
         </div>
     </div>
 </body>
@@ -605,7 +631,7 @@ class YouTubePlaylistGenerator:
         with open(f"{self.channels_dir}/index.html", 'w', encoding='utf-8') as f:
             f.write(html)
         
-        print(f"✅ Generated channels index: {self.channels_dir}/index.html")
+        print(f"✅ Generated channels index with {len(channels)} channels")
     
     def generate_epg(self, channels_data):
         """Generate XMLTV EPG file"""
@@ -845,34 +871,4 @@ def main():
     print("\n📺 Generating individual channel playlists...")
     individual_channels = generator.generate_individual_playlists(channels_data)
     
-    generator.save_cache()
-    
-    print(f"\n{'='*50}")
-    print(f"📊 FINAL STATISTICS:")
-    print(f"   Live: {stats['live']}/{stats['total']}")
-    print(f"   Offline: {stats['offline']}")
-    print(f"   Errors: {stats['error']}")
-    print(f"\n📊 Quality Distribution:")
-    for quality, count in stats['qualities'].items():
-        if count > 0:
-            print(f"   {quality}: {count}")
-    print(f"\n📊 Categories:")
-    for category, count in stats['by_category'].items():
-        print(f"   {category}: {count}")
-    print(f"\n📊 Countries:")
-    for country, count in stats['by_country'].items():
-        print(f"   {country}: {count}")
-    print(f"\n📁 Generated Files:")
-    print("   - streams.m3u8 (Main playlist)")
-    print("   - streams_hd.m3u8 (HD only)")
-    print("   - streams_mobile.m3u8 (Mobile quality)")
-    print("   - streams_audio.m3u8 (Audio only)")
-    print("   - epg.xml (TV Guide)")
-    print("   - stats.json (Detailed statistics)")
-    print(f"   - channels/ (Individual channel files - {len(individual_channels)} files)")
-    print(f"\n🌐 Individual Channels URL:")
-    print(f"   https://uticap.github.io/Youtube-to-M3u8/channels/")
-    print(f"{'='*50}")
-
-if __name__ == "__main__":
-    main()
+    generator.save_cache
