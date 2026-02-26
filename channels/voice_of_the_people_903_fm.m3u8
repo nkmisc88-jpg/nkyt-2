@@ -1,0 +1,11 @@
+#EXTM3U
+#EXT-X-VERSION:3
+# Channel: Voice of the People 903 FM
+# ID: UCC54ckTvq2EphHOiM5iPFzg
+# Quality: 720p
+# Status: LIVE (as of 11:14 UTC)
+# Generated: 2026-02-26 11:14:00 UTC
+# URL expires: ~16:14 UTC (refresh playlist if expired)
+
+#EXTINF:-1 tvg-id="UCC54ckTvq2EphHOiM5iPFzg" tvg-logo="logos/UCC54ckTvq2EphHOiM5iPFzg.jpg" tvg-name="Voice of the People 903 FM" group-title="Individual",Voice of the People 903 FM [720p] 🔴 LIVE
+https://manifest.googlevideo.com/api/manifest/hls_playlist/expire/1772126018/ei/4iqgafyRNPvwir4Ppa3OkA4/ip/2a09:bac1:76c0:28::4cf:33/id/63uM4f66d4A.2/itag/300/source/yt_live_broadcast/requiressl/yes/ratebypass/yes/live/1/sgoap/gir%3Dyes%3Bitag%3D140/sgovp/gir%3Dyes%3Bitag%3D298/rqh/1/hls_chunk_host/rr1---sn-vgqsknds.googlevideo.com/xpc/EgVo2aDSNQ%3D%3D/playlist_duration/30/manifest_duration/30/ss/1/ssa/1/bui/AVNa5-wVtJkjFJrbokwmL_69KcT2eNU2ckdZCtfRpzLivE7IrwL3eeQm0RXJBwMNCub3eI_u7dCUjf5K/spc/6dlaFEOaL5lF_mEQCmS1l_WskqO_Ao5J4qsI6krhcPXkEhEpG7fvEl65bOo-COtE/vprv/1/reg/0/playlist_type/DVR/initcwndbps/3130000/met/1772104419,/mh/KT/mm/44/mn/sn-vgqsknds/ms/lva/mv/m/mvi/1/pl/49/rms/lva,lva/dover/11/pacing/0/keepalive/yes/fexp/51552689,51565115,51565682,51580968,51791333/mt/1772104114/sparams/expire,ei,ip,id,itag,source,requiressl,ratebypass,live,sgoap,sgovp,rqh,xpc,playlist_duration,manifest_duration,ss,ssa,bui,spc,vprv,reg,playlist_type/sig/AJEij0EwRQIhAIXmfRnpij1WzSSgL8PmMCWnXIJMZFzzCJBsyKDctwLEAiAdcqKFqOYKtvh17IBYKcGrl2SvBLHkHF4rHtXQfjvwRw%3D%3D/lsparams/hls_chunk_host,initcwndbps,met,mh,mm,mn,ms,mv,mvi,pl,rms/lsig/APaTxxMwRgIhAOI506SIEtT1MfDSb4A4xf3vUFBSVVvT4WUlFJbOmSIoAiEAnF8y_VV0sOg1XCs_sv98yodY1Ey7BPgdINNnp063mNs%3D/playlist/index.m3u8
