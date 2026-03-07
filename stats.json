@@ -1,20 +1,20 @@
 {
-  "total": 10,
-  "live": 10,
+  "total": 9,
+  "live": 9,
   "offline": 0,
   "error": 0,
   "qualities": {
-    "1080p": 6,
+    "1080p": 5,
     "720p": 4,
     "480p": 0,
     "other": 0
   },
   "by_category": {
     "News": 4,
-    "General": 6
+    "General": 5
   },
   "by_country": {
-    "US": 10
+    "US": 9
   },
   "individual_channels": [
     {
@@ -25,7 +25,7 @@
     {
       "name": "TVC News Nigeria",
       "file": "channels/tvc_news_nigeria.m3u8",
-      "quality": "1080p"
+      "quality": "720p"
     },
     {
       "name": "Channels Television",
@@ -48,6 +48,11 @@
       "quality": "720p"
     },
     {
+      "name": "AITLiveStream1",
+      "file": "channels/aitlivestream1.m3u8",
+      "quality": "1080p"
+    },
+    {
       "name": "Voice of the People TV",
       "file": "channels/voice_of_the_people_tv.m3u8",
       "quality": "720p"
@@ -55,16 +60,6 @@
     {
       "name": "JoyNews",
       "file": "channels/joynews.m3u8",
-      "quality": "1080p"
-    },
-    {
-      "name": "TV3 Ghana",
-      "file": "channels/tv3_ghana.m3u8",
-      "quality": "720p"
-    },
-    {
-      "name": "Adom TV",
-      "file": "channels/adom_tv.m3u8",
       "quality": "1080p"
     }
   ]

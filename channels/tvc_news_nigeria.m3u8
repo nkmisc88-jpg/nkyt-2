@@ -2,11 +2,11 @@
 #EXT-X-VERSION:3
 # Channel: TVC News Nigeria
 # ID: UCgp4A6I8LCWrhUzn-5SbKvA
-# Quality: 1080p
+# Quality: 720p
 # Country: US
-# Status: LIVE (as of 12:49 UTC)
-# Generated: 2026-03-07 12:49:11 UTC
-# URL expires: ~17:49 UTC (refresh playlist if expired)
+# Status: LIVE (as of 18:35 UTC)
+# Generated: 2026-03-07 18:35:39 UTC
+# URL expires: ~23:35 UTC (refresh playlist if expired)
 
-#EXTINF:-1 tvg-id="UCgp4A6I8LCWrhUzn-5SbKvA" tvg-logo="logos/UCgp4A6I8LCWrhUzn-5SbKvA.jpg" tvg-name="TVC News Nigeria" group-title="Individual",TVC News Nigeria [1080p] 🔴 LIVE
-https://manifest.googlevideo.com/api/manifest/hls_playlist/expire/1772909260/ei/bB6sacOkAe6_i9oPy5T12Qc/ip/2a09:bac1:7681:5e78::259:87/id/zh-oRh37HNc.1/itag/96/source/yt_live_broadcast/requiressl/yes/ratebypass/yes/live/1/sgoap/gir%3Dyes%3Bitag%3D140/sgovp/gir%3Dyes%3Bitag%3D137/rqh/1/hls_chunk_host/rr4---sn-vgqskndl.googlevideo.com/xpc/EgVo2aDSNQ%3D%3D/playlist_duration/30/manifest_duration/30/ss/1/ssa/1/bui/AVNa5-ywtoJxDv1YISPMPEW_FdXq_488hutPAV4uzhThZ_GUGbh0y3y5eLB29KYbrEHnxtOmmFhzE4oB/spc/6dlaFIK49YTyEK7HPoPmWUJh_Bxb0inQ9T5_9TRgq2Wir1ACdyu9bTWBbGOn3Sry/vprv/1/reg/0/playlist_type/DVR/initcwndbps/3006250/met/1772887660,/mh/Ep/mm/44/mn/sn-vgqskndl/ms/lva/mv/m/mvi/4/pl/48/rms/lva,lva/dover/11/pacing/0/keepalive/yes/fexp/51565116,51565681,51791334/mt/1772887239/sparams/expire,ei,ip,id,itag,source,requiressl,ratebypass,live,sgoap,sgovp,rqh,xpc,playlist_duration,manifest_duration,ss,ssa,bui,spc,vprv,reg,playlist_type/sig/AHEqNM4wRAIgM84LJtpqD3YH6sBMZkyf6V2ONrZDnpNPWysWOUu1VYYCICB62XHmKuQyQfKAN23XaSthCMVVdJ0qKiCdkMffmI2T/lsparams/hls_chunk_host,initcwndbps,met,mh,mm,mn,ms,mv,mvi,pl,rms/lsig/APaTxxMwRAIgKM6YO4dPIKJCwA4_lPUW7NAp-_oeXVZd9hBzjSfE1oYCIHKBJy-vROX5_-XESXX6pnpJgmMtQe25U3Ry3rHqQA_g/playlist/index.m3u8
+#EXTINF:-1 tvg-id="UCgp4A6I8LCWrhUzn-5SbKvA" tvg-logo="logos/UCgp4A6I8LCWrhUzn-5SbKvA.jpg" tvg-name="TVC News Nigeria" group-title="Individual",TVC News Nigeria [720p] 🔴 LIVE
+https://manifest.googlevideo.com/api/manifest/hls_playlist/expire/1772930076/ei/vG-saczEMMuMlu8PiOfJgAE/ip/2a09:bac5:7976:1cd2::2df:97/id/sjaM1VpIiVU.2/itag/95/source/yt_live_broadcast/requiressl/yes/ratebypass/yes/live/1/sgoap/gir%3Dyes%3Bitag%3D140/sgovp/gir%3Dyes%3Bitag%3D136/rqh/1/hls_chunk_host/rr4---sn-vgqsrndl.googlevideo.com/xpc/EgVo2aDSNQ%3D%3D/playlist_duration/30/manifest_duration/30/ss/1/ssa/1/bui/AVNa5-wMm-otuZ92gE9XNJDby-g2OzbSC4XlEcRqZ3LFSFOk4orkeGnn2vnPytqUOIyuUwA3nB1q-nOG/spc/6dlaFEEa0FhQJq_rL6MPZnNiXgThVIXNV258ajSAvgCHq21ZI2OmmS-2Ak_cTDLn/vprv/1/reg/0/playlist_type/DVR/initcwndbps/4480000/met/1772908477,/mh/OM/mm/44/mn/sn-vgqsrndl/ms/lva/mv/m/mvi/4/pl/42/rms/lva,lva/dover/11/pacing/0/keepalive/yes/fexp/51565115,51565682,51791334/mt/1772908110/sparams/expire,ei,ip,id,itag,source,requiressl,ratebypass,live,sgoap,sgovp,rqh,xpc,playlist_duration,manifest_duration,ss,ssa,bui,spc,vprv,reg,playlist_type/sig/AHEqNM4wRAIgCmU7E1aPj595ve3rfP-dFmGJbQBPiY-7PQmtYM-tsgcCIB3vhdK02vjnFko9h7HOM6U2sZ58wnHRgSPBIrOChOmH/lsparams/hls_chunk_host,initcwndbps,met,mh,mm,mn,ms,mv,mvi,pl,rms/lsig/APaTxxMwRQIhAPLS3fB5OHCLMMtpCMfJMtZoD5g2Pri-IbLXZ9qlQ9MbAiBMv5qUEZeztz-oQ5_v2c7S5eNP60dtUurc7NZRL6VDoQ%3D%3D/playlist/index.m3u8
