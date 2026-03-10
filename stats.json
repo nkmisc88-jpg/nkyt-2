@@ -48,6 +48,11 @@
       "quality": "720p"
     },
     {
+      "name": "Voice of the People 903 FM",
+      "file": "channels/voice_of_the_people_903_fm.m3u8",
+      "quality": "720p"
+    },
+    {
       "name": "Voice of the People TV",
       "file": "channels/voice_of_the_people_tv.m3u8",
       "quality": "720p"
@@ -56,11 +61,6 @@
       "name": "JoyNews",
       "file": "channels/joynews.m3u8",
       "quality": "1080p"
-    },
-    {
-      "name": "TV3 Ghana",
-      "file": "channels/tv3_ghana.m3u8",
-      "quality": "720p"
     },
     {
       "name": "Adom TV",
