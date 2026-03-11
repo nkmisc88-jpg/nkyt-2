@@ -1,10 +1,10 @@
 name: YouTube Live M3U8 Generator
-run-name: Generate HD Playlist with Smart Quality Selection 🎬
+run-name: Generate HD Playlist 🎬
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */6 * * *'  # Refresh every 6 hours
+    - cron: '0 */6 * * *'
   push:
     paths:
       - 'streams.txt'
@@ -13,13 +13,6 @@ on:
 
 permissions:
   contents: write
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: false
-
-env:
-  PYTHONUNBUFFERED: "1"
 
 jobs:
   generate:
@@ -30,27 +23,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
           token: ${{ secrets.WORKFLOW_PAT }}
 
-      - name: Setup Python & dependencies
-        run: |
-          pip install --upgrade pip yt-dlp requests
-          echo "✅ yt-dlp: $(yt-dlp --version)"
+      - name: Setup Python
+        run: pip install --upgrade pip yt-dlp requests
 
       - name: Setup Cloudflare WARP
         continue-on-error: true
         run: |
           echo "🌐 Setting up Cloudflare WARP..."
           sudo apt-get update -qq
-          sudo apt-get install -y -qq wireguard-tools iptables
+          sudo apt-get install -y -qq wireguard-tools
           curl -fsSL https://github.com/ViRb3/wgcf/releases/download/v2.2.22/wgcf_2.2.22_linux_amd64 -o wgcf
           chmod +x wgcf
           sudo mv wgcf /usr/local/bin/
           wgcf register --accept-tos
           wgcf generate
           
-          # FIX: Disable routing table management to prevent the 'nft' hang
+          # FIX: Stop the 'nft' hang by disabling routing table management
           sed -i '/Table = auto/d' wgcf-profile.conf
           echo "Table = off" >> wgcf-profile.conf
           
@@ -58,122 +48,38 @@ jobs:
           sudo cp wgcf-profile.conf /etc/wireguard/wgcf.conf
           sudo wg-quick up /etc/wireguard/wgcf.conf || true
           
-          echo "✅ WARP setup complete"
-          echo "📍 Current IP Info:"
+          echo "✅ WARP setup complete. Testing connection..."
           curl -s https://www.cloudflare.com/cdn-cgi/trace | grep -E "ip|loc"
 
-      - name: Create cookies file securely
+      - name: Load Cookies Secret
         env:
           COOKIES: ${{ secrets.COOKIES_TXT }}
         run: |
-          if [ -z "$COOKIES" ]; then
-            echo "❌ COOKIES_TXT secret is required"
-            exit 1
-          fi
-          install -m 600 /dev/null cookies.txt
-          echo "$COOKIES" > cookies.txt
-          echo "✅ Cookies loaded ($(wc -l < cookies.txt) lines)"
-
-      - name: Create necessary directories
-        run: |
-          mkdir -p logos channels
-          touch logos/.gitkeep channels/.gitkeep
-          echo "📁 Directories created: logos/, channels/"
-
-      - name: Run enhanced playlist generator
-        id: generate
-        run: |
-          echo "🚀 Starting playlist generation..."
-          python generate.py
-          echo "✅ Generation complete"
-
-      - name: Load stats
-        id: stats
-        run: |
-          if [ -f stats.json ]; then
-            ACTIVE=$(python -c "import json; print(json.load(open('stats.json')).get('live', 0))")
-            TOTAL=$(python -c "import json; print(json.load(open('stats.json')).get('total', 0))")
-            HD=$(python -c "import json; print(json.load(open('stats.json')).get('qualities', {}).get('1080p', 0))")
-            echo "active=$ACTIVE" >> $GITHUB_OUTPUT
-            echo "total=$TOTAL" >> $GITHUB_OUTPUT
-            echo "quality_1080p=$HD" >> $GITHUB_OUTPUT
-            echo "📊 Stats loaded: $ACTIVE/$TOTAL active"
+          if [ ! -z "$COOKIES" ]; then
+            echo "$COOKIES" > cookies.txt
+            echo "✅ Cookies file created from Secrets"
           else
-            echo "active=0" >> $GITHUB_OUTPUT
-            echo "total=0" >> $GITHUB_OUTPUT
+            echo "⚠️ No COOKIES_TXT secret found, running in Anonymous mode"
           fi
 
-      - name: Prepare for GitHub Pages
-        run: |
-          touch .nojekyll
-          cat > _config.yml << 'EOF'
-          include:
-            - "*.m3u8"
-            - "*.xml"
-            - "*.json"
-            - "logos/"
-            - "channels/"
-          mime_types:
-            m3u8: application/vnd.apple.mpegurl
-            xml: application/xml
-            json: application/json
-          EOF
-          echo "✅ GitHub Pages files created"
+      - name: Run Generator
+        run: python generate.py
 
-      - name: Show generated files
-        run: |
-          echo ""
-          echo "📄 Generated Files:"
-          echo "=================="
-          ls -la streams*.m3u8 2>/dev/null || echo "No playlist files"
-          ls -la epg.xml 2>/dev/null || echo "No EPG file"
-          ls -la stats.json 2>/dev/null || echo "No stats file"
-
-      - name: Send Telegram Notification
-        uses: cbrgm/telegram-github-action@v1
-        if: success() && github.event_name != 'pull_request'
-        with:
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
-          message: |
-            📺 *YouTube Playlist Updated*
-            
-            ✅ *Active:* ${{ steps.stats.outputs.active }}/${{ steps.stats.outputs.total }}
-            📊 *1080p:* ${{ steps.stats.outputs.quality_1080p }}
-            
-            🌐 *Main Playlist:*
-            https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/streams.m3u8
-            
-            🕐 *Updated:* $(date -u '+%H:%M UTC')
-        continue-on-error: true
-
-      - name: Commit and push with retry
+      - name: Commit and push
         env:
           PAT_TOKEN: ${{ secrets.WORKFLOW_PAT }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
-          git add -f streams*.m3u8 epg.xml stats.json .nojekyll _config.yml 2>/dev/null || true
-          git add -f logos/ channels/ .channel_cache.json 2>/dev/null || true
-          
+          git add .
           if git diff --cached --quiet; then
-            echo "ℹ️ No changes to commit"
-            exit 0
+            echo "No changes to commit"
+          else
+            git commit -m "🔄 Auto-update playlists [$(date -u +%H:%M)]"
+            git pull --rebase origin main
+            git push "https://x-access-token:${PAT_TOKEN}@github.com/${{ github.repository }}.git" HEAD:main
           fi
-          
-          git commit -m "🔄 Update playlists [$(date -u +%H:%M)]"
-          
-          MAX_RETRIES=5
-          for i in $(seq 1 $MAX_RETRIES); do
-            git pull --rebase origin main || true
-            if git push "https://x-access-token:${PAT_TOKEN}@github.com/${{ github.repository }}.git" HEAD:main; then
-              echo "✅ Pushed successfully"
-              break
-            fi
-            sleep 5
-          done
 
-      - name: Cleanup sensitive files
+      - name: Cleanup
         if: always()
         run: rm -f cookies.txt wgcf-profile.conf wgcf-account.toml 2>/dev/null || true
