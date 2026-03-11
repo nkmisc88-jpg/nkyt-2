@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tv generator-info-name="YouTube Live EPG Generator" date="20260311065541 ">
+<tv generator-info-name="YouTube Live EPG Generator" date="20260311130140 ">
   <channel id="UCyEJX-kSj0kOOCS7Qlq2G7g">
     <display-name>Arise News</display-name>
     <icon src="logos/UCyEJX-kSj0kOOCS7Qlq2G7g.jpg"/>
   </channel>
-  <programme start="20260311065541 +0000" stop="20260311075541 +0000" channel="UCyEJX-kSj0kOOCS7Qlq2G7g">
-    <title>Arise News Live 2026-03-11 06:54</title>
+  <programme start="20260311130140 +0000" stop="20260311140140 +0000" channel="UCyEJX-kSj0kOOCS7Qlq2G7g">
+    <title>Arise News Live 2026-03-11 13:00</title>
     <desc>Live YouTube stream from Arise News</desc>
     <category>Live</category>
   </programme>
@@ -13,8 +13,8 @@
     <display-name>TVC News Nigeria</display-name>
     <icon src="logos/UCgp4A6I8LCWrhUzn-5SbKvA.jpg"/>
   </channel>
-  <programme start="20260311065541 +0000" stop="20260311075541 +0000" channel="UCgp4A6I8LCWrhUzn-5SbKvA">
-    <title>TVC News Nigeria Livestream 2026-03-11 06:54</title>
+  <programme start="20260311130140 +0000" stop="20260311140140 +0000" channel="UCgp4A6I8LCWrhUzn-5SbKvA">
+    <title>LIVE [LAGOS]: SMA GOLD MOBILIZATION FOR ASIWAJU 2026-03-11 13:00</title>
     <desc>Live YouTube stream from TVC News Nigeria</desc>
     <category>Live</category>
   </programme>
@@ -22,8 +22,8 @@
     <display-name>Channels Television</display-name>
     <icon src="logos/UCEXGDNclvmg6RW0vipJYsTQ.jpg"/>
   </channel>
-  <programme start="20260311065541 +0000" stop="20260311075541 +0000" channel="UCEXGDNclvmg6RW0vipJYsTQ">
-    <title>Channels Television -- Live Stream 2026-03-11 06:54</title>
+  <programme start="20260311130140 +0000" stop="20260311140140 +0000" channel="UCEXGDNclvmg6RW0vipJYsTQ">
+    <title>Channels Television -- Live Stream 2026-03-11 13:00</title>
     <desc>Live YouTube stream from Channels Television</desc>
     <category>Live</category>
   </programme>
@@ -31,8 +31,8 @@
     <display-name>News Central TV</display-name>
     <icon src="logos/UCPLKy4Ypb4mfblbjJI8Aljw.jpg"/>
   </channel>
-  <programme start="20260311065541 +0000" stop="20260311075541 +0000" channel="UCPLKy4Ypb4mfblbjJI8Aljw">
-    <title>🔴LIVE: News Central TV Live | 2026-03-11 06:54</title>
+  <programme start="20260311130140 +0000" stop="20260311140140 +0000" channel="UCPLKy4Ypb4mfblbjJI8Aljw">
+    <title>🔴LIVE: News Central TV Live | 2026-03-11 13:00</title>
     <desc>Live YouTube stream from News Central TV</desc>
     <category>Live</category>
   </programme>
@@ -40,8 +40,8 @@
     <display-name>NTA Live</display-name>
     <icon src="logos/UCaiRlJZKn0bMRNutRWArrrg.jpg"/>
   </channel>
-  <programme start="20260311065541 +0000" stop="20260311075541 +0000" channel="UCaiRlJZKn0bMRNutRWArrrg">
-    <title>Good Morning Nigeria 2026-03-11 06:55</title>
+  <programme start="20260311130140 +0000" stop="20260311140140 +0000" channel="UCaiRlJZKn0bMRNutRWArrrg">
+    <title>NTA Live 2026-03-11 13:00</title>
     <desc>Live YouTube stream from NTA Live</desc>
     <category>Live</category>
   </programme>
@@ -49,8 +49,8 @@
     <display-name>Silverbird N24</display-name>
     <icon src="logos/UCNuPuew8lLVB3mMAm9_Qt9w.jpg"/>
   </channel>
-  <programme start="20260311065541 +0000" stop="20260311075541 +0000" channel="UCNuPuew8lLVB3mMAm9_Qt9w">
-    <title>silverbird television live stream 2026-03-11 06:55</title>
+  <programme start="20260311130140 +0000" stop="20260311140140 +0000" channel="UCNuPuew8lLVB3mMAm9_Qt9w">
+    <title>silverbird television live stream 2026-03-11 13:00</title>
     <desc>Live YouTube stream from Silverbird N24</desc>
     <category>Live</category>
   </programme>
@@ -58,18 +58,36 @@
     <display-name>Voice of the People 903 FM</display-name>
     <icon src="logos/UCC54ckTvq2EphHOiM5iPFzg.jpg"/>
   </channel>
-  <programme start="20260311065541 +0000" stop="20260311075541 +0000" channel="UCC54ckTvq2EphHOiM5iPFzg">
-    <title>JUST IN: New DIGs Get Portfolios 2026-03-11 06:55</title>
+  <programme start="20260311130140 +0000" stop="20260311140140 +0000" channel="UCC54ckTvq2EphHOiM5iPFzg">
+    <title>BREAKING: Judiciary Under Fire! EFCC Discovers $160,000 Cash in Judge’s House 2026-03-11 13:01</title>
     <desc>Live YouTube stream from Voice of the People 903 FM</desc>
     <category>Live</category>
   </programme>
-  <channel id="UC9VSDs4ZXo3sjOoPkmW2iRQ">
-    <display-name>TV3 Ghana</display-name>
-    <icon src="logos/UC9VSDs4ZXo3sjOoPkmW2iRQ.jpg"/>
+  <channel id="UCKBumb4EyE5Vi3Pf133Ivqw">
+    <display-name>Voice of the People TV</display-name>
+    <icon src="logos/UCKBumb4EyE5Vi3Pf133Ivqw.jpg"/>
   </channel>
-  <programme start="20260311065541 +0000" stop="20260311075541 +0000" channel="UC9VSDs4ZXo3sjOoPkmW2iRQ">
-    <title>LIVE: TV3 Newday|| 11-03-2026 2026-03-11 06:55</title>
-    <desc>Live YouTube stream from TV3 Ghana</desc>
+  <programme start="20260311130140 +0000" stop="20260311140140 +0000" channel="UCKBumb4EyE5Vi3Pf133Ivqw">
+    <title>VOPTV LIVE 2026-03-11 13:01</title>
+    <desc>Live YouTube stream from Voice of the People TV</desc>
+    <category>Live</category>
+  </programme>
+  <channel id="UChd1DEecCRlxaa0-hvPACCw">
+    <display-name>JoyNews</display-name>
+    <icon src="logos/UChd1DEecCRlxaa0-hvPACCw.jpg"/>
+  </channel>
+  <programme start="20260311130140 +0000" stop="20260311140140 +0000" channel="UChd1DEecCRlxaa0-hvPACCw">
+    <title>JoyNews Live 2026-03-11 13:01</title>
+    <desc>Live YouTube stream from JoyNews</desc>
+    <category>Live</category>
+  </programme>
+  <channel id="UCKlgbbF9wphTKATOWiG5jPQ">
+    <display-name>Adom TV</display-name>
+    <icon src="logos/UCKlgbbF9wphTKATOWiG5jPQ.jpg"/>
+  </channel>
+  <programme start="20260311130140 +0000" stop="20260311140140 +0000" channel="UCKlgbbF9wphTKATOWiG5jPQ">
+    <title>ADOM TV LIVE 2026-03-11 13:01</title>
+    <desc>Live YouTube stream from Adom TV</desc>
     <category>Live</category>
   </programme>
 </tv>
