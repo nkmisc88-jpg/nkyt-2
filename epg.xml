@@ -1,110 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tv generator-info-name="YouTube Live EPG Generator" date="20260312065304 ">
-  <channel id="UCyEJX-kSj0kOOCS7Qlq2G7g">
-    <display-name>Arise News</display-name>
-    <icon src="logos/UCyEJX-kSj0kOOCS7Qlq2G7g.jpg"/>
-  </channel>
-  <programme start="20260312065304 +0000" stop="20260312075304 +0000" channel="UCyEJX-kSj0kOOCS7Qlq2G7g">
-    <title>Arise News Live 2026-03-12 06:50</title>
-    <desc>Live YouTube stream from Arise News</desc>
-    <category>Live</category>
-  </programme>
-  <channel id="UCgp4A6I8LCWrhUzn-5SbKvA">
-    <display-name>TVC News Nigeria</display-name>
-    <icon src="logos/UCgp4A6I8LCWrhUzn-5SbKvA.jpg"/>
-  </channel>
-  <programme start="20260312065304 +0000" stop="20260312075304 +0000" channel="UCgp4A6I8LCWrhUzn-5SbKvA">
-    <title>TVC News Nigeria Livestream 2026-03-12 06:50</title>
-    <desc>Live YouTube stream from TVC News Nigeria</desc>
-    <category>Live</category>
-  </programme>
-  <channel id="UCEXGDNclvmg6RW0vipJYsTQ">
-    <display-name>Channels Television</display-name>
-    <icon src="logos/UCEXGDNclvmg6RW0vipJYsTQ.jpg"/>
-  </channel>
-  <programme start="20260312065304 +0000" stop="20260312075304 +0000" channel="UCEXGDNclvmg6RW0vipJYsTQ">
-    <title>Channels Television -- Live Stream 2026-03-12 06:51</title>
-    <desc>Live YouTube stream from Channels Television</desc>
-    <category>Live</category>
-  </programme>
-  <channel id="UCPLKy4Ypb4mfblbjJI8Aljw">
-    <display-name>News Central TV</display-name>
-    <icon src="logos/UCPLKy4Ypb4mfblbjJI8Aljw.jpg"/>
-  </channel>
-  <programme start="20260312065304 +0000" stop="20260312075304 +0000" channel="UCPLKy4Ypb4mfblbjJI8Aljw">
-    <title>🔴LIVE: News Central TV Live | 2026-03-12 06:51</title>
-    <desc>Live YouTube stream from News Central TV</desc>
-    <category>Live</category>
-  </programme>
-  <channel id="UCaiRlJZKn0bMRNutRWArrrg">
-    <display-name>NTA Live</display-name>
-    <icon src="logos/UCaiRlJZKn0bMRNutRWArrrg.jpg"/>
-  </channel>
-  <programme start="20260312065304 +0000" stop="20260312075304 +0000" channel="UCaiRlJZKn0bMRNutRWArrrg">
-    <title>NTA Live 2026-03-12 06:51</title>
-    <desc>Live YouTube stream from NTA Live</desc>
-    <category>Live</category>
-  </programme>
-  <channel id="UCNuPuew8lLVB3mMAm9_Qt9w">
-    <display-name>Silverbird N24</display-name>
-    <icon src="logos/UCNuPuew8lLVB3mMAm9_Qt9w.jpg"/>
-  </channel>
-  <programme start="20260312065304 +0000" stop="20260312075304 +0000" channel="UCNuPuew8lLVB3mMAm9_Qt9w">
-    <title>silverbird television live stream 2026-03-12 06:51</title>
-    <desc>Live YouTube stream from Silverbird N24</desc>
-    <category>Live</category>
-  </programme>
-  <channel id="UCC54ckTvq2EphHOiM5iPFzg">
-    <display-name>Voice of the People 903 FM</display-name>
-    <icon src="logos/UCC54ckTvq2EphHOiM5iPFzg.jpg"/>
-  </channel>
-  <programme start="20260312065304 +0000" stop="20260312075304 +0000" channel="UCC54ckTvq2EphHOiM5iPFzg">
-    <title>Trump Says Oil Reserves Release Will Reduce Prices 2026-03-12 06:51</title>
-    <desc>Live YouTube stream from Voice of the People 903 FM</desc>
-    <category>Live</category>
-  </programme>
-  <channel id="UCKBumb4EyE5Vi3Pf133Ivqw">
-    <display-name>Voice of the People TV</display-name>
-    <icon src="logos/UCKBumb4EyE5Vi3Pf133Ivqw.jpg"/>
-  </channel>
-  <programme start="20260312065304 +0000" stop="20260312075304 +0000" channel="UCKBumb4EyE5Vi3Pf133Ivqw">
-    <title>VOPTV LIVE 2026-03-12 06:51</title>
-    <desc>Live YouTube stream from Voice of the People TV</desc>
-    <category>Live</category>
-  </programme>
-  <channel id="UChd1DEecCRlxaa0-hvPACCw">
-    <display-name>JoyNews</display-name>
-    <icon src="logos/UChd1DEecCRlxaa0-hvPACCw.jpg"/>
-  </channel>
-  <programme start="20260312065304 +0000" stop="20260312075304 +0000" channel="UChd1DEecCRlxaa0-hvPACCw">
-    <title>JoyNews Live 2026-03-12 06:51</title>
-    <desc>Live YouTube stream from JoyNews</desc>
-    <category>Live</category>
-  </programme>
-  <channel id="UC9VSDs4ZXo3sjOoPkmW2iRQ">
-    <display-name>TV3 Ghana</display-name>
-    <icon src="logos/UC9VSDs4ZXo3sjOoPkmW2iRQ.jpg"/>
-  </channel>
-  <programme start="20260312065304 +0000" stop="20260312075304 +0000" channel="UC9VSDs4ZXo3sjOoPkmW2iRQ">
-    <title>LIVE: TV3 Newday || 12-03-2026 2026-03-12 06:52</title>
-    <desc>Live YouTube stream from TV3 Ghana</desc>
-    <category>Live</category>
-  </programme>
-  <channel id="UCKlgbbF9wphTKATOWiG5jPQ">
-    <display-name>Adom TV</display-name>
-    <icon src="logos/UCKlgbbF9wphTKATOWiG5jPQ.jpg"/>
-  </channel>
-  <programme start="20260312065304 +0000" stop="20260312075304 +0000" channel="UCKlgbbF9wphTKATOWiG5jPQ">
-    <title>ADOM TV LIVE 2026-03-12 06:52</title>
-    <desc>Live YouTube stream from Adom TV</desc>
-    <category>Live</category>
-  </programme>
+<tv generator-info-name="YouTube Live EPG Generator" date="20260312065831 ">
   <channel id="UCmHCyBKDCQk5GwJB3NvTbdw">
     <display-name>Sports TV</display-name>
     <icon src="logos/UCmHCyBKDCQk5GwJB3NvTbdw.jpg"/>
   </channel>
-  <programme start="20260312065304 +0000" stop="20260312075304 +0000" channel="UCmHCyBKDCQk5GwJB3NvTbdw">
-    <title>🔴 - 𝐑𝐄𝐋𝐈𝐕𝐄 | Pakistan vs Bangladesh | 3rd T20I, 2025 | PCB | M3L1J 2026-03-12 06:52</title>
+  <programme start="20260312065831 +0000" stop="20260312075831 +0000" channel="UCmHCyBKDCQk5GwJB3NvTbdw">
+    <title>🔴 - 𝐑𝐄𝐋𝐈𝐕𝐄 | Pakistan vs Bangladesh | 3rd T20I, 2025 | PCB | M3L1J 2026-03-12 06:58</title>
     <desc>Live YouTube stream from Sports TV</desc>
     <category>Live</category>
   </programme>
@@ -112,8 +13,8 @@
     <display-name>Warner Bros Classics</display-name>
     <icon src="logos/UCU0rIMU3k_AsVA8d6N1B03w.jpg"/>
   </channel>
-  <programme start="20260312065304 +0000" stop="20260312075304 +0000" channel="UCU0rIMU3k_AsVA8d6N1B03w">
-    <title>🔴 LIVE: Tom and Jerry Golden Era Live Stream! | 1940's-1970's | Warner Classics 2026-03-12 06:52</title>
+  <programme start="20260312065831 +0000" stop="20260312075831 +0000" channel="UCU0rIMU3k_AsVA8d6N1B03w">
+    <title>🔴 LIVE: Tom and Jerry Golden Era Live Stream! | 1940's-1970's | Warner Classics 2026-03-12 06:58</title>
     <desc>Live YouTube stream from Warner Bros Classics</desc>
     <category>Live</category>
   </programme>
@@ -121,8 +22,8 @@
     <display-name>Boomerang UK</display-name>
     <icon src="logos/UCmst562fALOY2cKb4IFgqEg.jpg"/>
   </channel>
-  <programme start="20260312065304 +0000" stop="20260312075304 +0000" channel="UCmst562fALOY2cKb4IFgqEg">
-    <title>🔴 LIVE: NEW Tom &amp; Jerry Marathon! Laugh, Learn and Have Fun with Tom and Jerry | Boomerang UK 2026-03-12 06:52</title>
+  <programme start="20260312065831 +0000" stop="20260312075831 +0000" channel="UCmst562fALOY2cKb4IFgqEg">
+    <title>🔴 LIVE: NEW Tom &amp; Jerry Marathon! Laugh, Learn and Have Fun with Tom and Jerry | Boomerang UK 2026-03-12 06:58</title>
     <desc>Live YouTube stream from Boomerang UK</desc>
     <category>Live</category>
   </programme>
@@ -130,8 +31,8 @@
     <display-name>Sun News</display-name>
     <icon src="logos/UCYlh4lH762HvHt6mmiecyWQ.jpg"/>
   </channel>
-  <programme start="20260312065304 +0000" stop="20260312075304 +0000" channel="UCYlh4lH762HvHt6mmiecyWQ">
-    <title>🔴LIVE: Headlines | தலைப்புச் செய்திகள் - 12.03.2026 | Today Headlines | Sun news 2026-03-12 06:53</title>
+  <programme start="20260312065831 +0000" stop="20260312075831 +0000" channel="UCYlh4lH762HvHt6mmiecyWQ">
+    <title>🔴LIVE: Headlines | தலைப்புச் செய்திகள் - 12.03.2026 | Today Headlines | Sun news 2026-03-12 06:58</title>
     <desc>Live YouTube stream from Sun News</desc>
     <category>Live</category>
   </programme>
