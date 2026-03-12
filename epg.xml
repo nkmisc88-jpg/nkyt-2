@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tv generator-info-name="YouTube Live EPG Generator" date="20260312124533 ">
+<tv generator-info-name="YouTube Live EPG Generator" date="20260312184545 ">
   <channel id="UCmHCyBKDCQk5GwJB3NvTbdw">
     <display-name>Sports TV</display-name>
     <icon src="logos/UCmHCyBKDCQk5GwJB3NvTbdw.jpg"/>
   </channel>
-  <programme start="20260312124533 +0000" stop="20260312134533 +0000" channel="UCmHCyBKDCQk5GwJB3NvTbdw">
-    <title>LIVE | Sialkot Region - Lahore Region Blues  | Match 11 | ABS Developers National T20 Cup | 2026 2026-03-12 12:44</title>
+  <programme start="20260312184545 +0000" stop="20260312194545 +0000" channel="UCmHCyBKDCQk5GwJB3NvTbdw">
+    <title>LIVE | Karachi Region Blues - Multan Region | Match 12 | ABS Developers National T20 Cup | 2026 2026-03-12 18:45</title>
     <desc>Live YouTube stream from Sports TV</desc>
     <category>Live</category>
   </programme>
@@ -13,8 +13,8 @@
     <display-name>Cricket South Africa</display-name>
     <icon src="logos/UCzevPCfP7MtRqOB0ZkU5cwg.jpg"/>
   </channel>
-  <programme start="20260312124533 +0000" stop="20260312134533 +0000" channel="UCzevPCfP7MtRqOB0ZkU5cwg">
-    <title>Eastern Cape Iinyathi vs Wenbro Impalas - CSA 1Day Cup Division 2 2025/26 2026-03-12 12:45</title>
+  <programme start="20260312184545 +0000" stop="20260312194545 +0000" channel="UCzevPCfP7MtRqOB0ZkU5cwg">
+    <title>Eastern Cape Iinyathi vs Wenbro Impalas - CSA 1Day Cup Division 2 2025/26 2026-03-12 18:45</title>
     <desc>Live YouTube stream from Cricket South Africa</desc>
     <category>Live</category>
   </programme>
@@ -22,8 +22,8 @@
     <display-name>Warner Bros Classics</display-name>
     <icon src="logos/UCU0rIMU3k_AsVA8d6N1B03w.jpg"/>
   </channel>
-  <programme start="20260312124533 +0000" stop="20260312134533 +0000" channel="UCU0rIMU3k_AsVA8d6N1B03w">
-    <title>🔴 LIVE: Tom and Jerry Golden Era Live Stream! | 1940's-1970's | Warner Classics 2026-03-12 12:45</title>
+  <programme start="20260312184545 +0000" stop="20260312194545 +0000" channel="UCU0rIMU3k_AsVA8d6N1B03w">
+    <title>🔴 LIVE: Tom and Jerry Golden Era Live Stream! | 1940's-1970's | Warner Classics 2026-03-12 18:45</title>
     <desc>Live YouTube stream from Warner Bros Classics</desc>
     <category>Live</category>
   </programme>
@@ -31,8 +31,8 @@
     <display-name>Boomerang UK</display-name>
     <icon src="logos/UCmst562fALOY2cKb4IFgqEg.jpg"/>
   </channel>
-  <programme start="20260312124533 +0000" stop="20260312134533 +0000" channel="UCmst562fALOY2cKb4IFgqEg">
-    <title>🔴 LIVE: NEW Tom &amp; Jerry Marathon! Laugh, Learn and Have Fun with Tom and Jerry | Boomerang UK 2026-03-12 12:45</title>
+  <programme start="20260312184545 +0000" stop="20260312194545 +0000" channel="UCmst562fALOY2cKb4IFgqEg">
+    <title>🔴 LIVE: NEW Tom &amp; Jerry Marathon! Laugh, Learn and Have Fun with Tom and Jerry | Boomerang UK 2026-03-12 18:45</title>
     <desc>Live YouTube stream from Boomerang UK</desc>
     <category>Live</category>
   </programme>
@@ -40,8 +40,8 @@
     <display-name>Sun News</display-name>
     <icon src="logos/UCYlh4lH762HvHt6mmiecyWQ.jpg"/>
   </channel>
-  <programme start="20260312124533 +0000" stop="20260312134533 +0000" channel="UCYlh4lH762HvHt6mmiecyWQ">
-    <title>🔴LIVE: Headlines | தலைப்புச் செய்திகள் - 12.03.2026 | Today Headlines | Sun news 2026-03-12 12:45</title>
+  <programme start="20260312184545 +0000" stop="20260312194545 +0000" channel="UCYlh4lH762HvHt6mmiecyWQ">
+    <title>🔴LIVE: Sun News | Gas Cylinder Crisis | Petrol &amp; Diesel | TN Election 2026 | CM MK Stalin 2026-03-12 18:45</title>
     <desc>Live YouTube stream from Sun News</desc>
     <category>Live</category>
   </programme>
