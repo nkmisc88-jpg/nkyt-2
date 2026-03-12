@@ -1,0 +1,12 @@
+#EXTM3U
+#EXT-X-VERSION:3
+# Channel: Sun News
+# ID: UCYlh4lH762HvHt6mmiecyWQ
+# Quality: 1080p
+# Country: US
+# Status: LIVE (as of 06:53 UTC)
+# Generated: 2026-03-12 06:53:04 UTC
+# URL expires: ~11:53 UTC (refresh playlist if expired)
+
+#EXTINF:-1 tvg-id="UCYlh4lH762HvHt6mmiecyWQ" tvg-logo="logos/UCYlh4lH762HvHt6mmiecyWQ.jpg" tvg-name="Sun News" group-title="Individual",Sun News [1080p] 🔴 LIVE
+https://manifest.googlevideo.com/api/manifest/hls_playlist/expire/1773319983/ei/z2Kyad2xM66psfIP262hiAI/ip/2a09:bac1:7680:28::1d3:9d/id/vVnUAwCP_AM.2/itag/96/source/yt_live_broadcast/requiressl/yes/ratebypass/yes/live/1/sgoap/gir%3Dyes%3Bitag%3D140/sgovp/gir%3Dyes%3Bitag%3D137/rqh/1/hls_chunk_host/rr2---sn-q4fl6nzy.googlevideo.com/xpc/EgVo2aDSNQ%3D%3D/playlist_duration/30/manifest_duration/30/ss/1/ssa/1/bui/AVNa5-wSpBGJxaMOISIA9nMRF7mN4c8XMJbLiCoUIKKfOKL2Fui3cjrGn7ff97SfRj6ZDqREdUgU_8EX/spc/6dlaFIRxy0WoE_w_XZ388qqI7QlPHzcJZ4AchtU-_dBfcN0MryJZB6Ijw1arCrlt/vprv/1/reg/0/playlist_type/DVR/initcwndbps/2727500/met/1773298384,/mh/ek/mm/44/mn/sn-q4fl6nzy/ms/lva/mv/m/mvi/2/pl/49/rms/lva,lva/dover/11/pacing/0/keepalive/yes/fexp/51565116,51565682,51791334/mt/1773298109/sparams/expire,ei,ip,id,itag,source,requiressl,ratebypass,live,sgoap,sgovp,rqh,xpc,playlist_duration,manifest_duration,ss,ssa,bui,spc,vprv,reg,playlist_type/sig/AHEqNM4wRQIhAJHHkLEk2KInrJh5cIBQ_4a4ehYkiRU_KS1QV1XCYveZAiAEe1y8_gxuhRskormt8_aQx1fFAEwV0VMSccD3PcAuGw%3D%3D/lsparams/hls_chunk_host,initcwndbps,met,mh,mm,mn,ms,mv,mvi,pl,rms/lsig/APaTxxMwRgIhAMOEq9nmUiBIX47gC_MKP-uRSt2rO-W7YVsnpwgviTRHAiEAtfcECNFrp14jcEi3fZoYkTD8v82WPCVQbXK-1VGwGKs%3D/playlist/index.m3u8
