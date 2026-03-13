@@ -4,8 +4,8 @@
   "offline": 0,
   "error": 0,
   "qualities": {
-    "1080p": 3,
-    "720p": 1,
+    "1080p": 4,
+    "720p": 0,
     "480p": 0,
     "other": 0
   },
@@ -24,14 +24,14 @@
       "quality": "1080p"
     },
     {
-      "name": "Warner Bros Classics",
-      "file": "channels/warner_bros_classics.m3u8",
+      "name": "Legends League Cricket",
+      "file": "channels/legends_league_cricket.m3u8",
       "quality": "1080p"
     },
     {
-      "name": "Boomerang UK",
-      "file": "channels/boomerang_uk.m3u8",
-      "quality": "720p"
+      "name": "Warner Bros Classics",
+      "file": "channels/warner_bros_classics.m3u8",
+      "quality": "1080p"
     },
     {
       "name": "Sun News",
