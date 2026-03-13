@@ -1,29 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tv generator-info-name="YouTube Live EPG Generator" date="20260312184545 ">
+<tv generator-info-name="YouTube Live EPG Generator" date="20260313012943 ">
   <channel id="UCmHCyBKDCQk5GwJB3NvTbdw">
     <display-name>Sports TV</display-name>
     <icon src="logos/UCmHCyBKDCQk5GwJB3NvTbdw.jpg"/>
   </channel>
-  <programme start="20260312184545 +0000" stop="20260312194545 +0000" channel="UCmHCyBKDCQk5GwJB3NvTbdw">
-    <title>LIVE | Karachi Region Blues - Multan Region | Match 12 | ABS Developers National T20 Cup | 2026 2026-03-12 18:45</title>
+  <programme start="20260313012943 +0000" stop="20260313022943 +0000" channel="UCmHCyBKDCQk5GwJB3NvTbdw">
+    <title>🔴 - 𝐑𝐄𝐋𝐈𝐕𝐄 | Lahore Qalandars vs Islamabad United | Match 19 | M3O1J 2026-03-13 01:29</title>
     <desc>Live YouTube stream from Sports TV</desc>
-    <category>Live</category>
-  </programme>
-  <channel id="UCzevPCfP7MtRqOB0ZkU5cwg">
-    <display-name>Cricket South Africa</display-name>
-    <icon src="logos/UCzevPCfP7MtRqOB0ZkU5cwg.jpg"/>
-  </channel>
-  <programme start="20260312184545 +0000" stop="20260312194545 +0000" channel="UCzevPCfP7MtRqOB0ZkU5cwg">
-    <title>Eastern Cape Iinyathi vs Wenbro Impalas - CSA 1Day Cup Division 2 2025/26 2026-03-12 18:45</title>
-    <desc>Live YouTube stream from Cricket South Africa</desc>
     <category>Live</category>
   </programme>
   <channel id="UCU0rIMU3k_AsVA8d6N1B03w">
     <display-name>Warner Bros Classics</display-name>
     <icon src="logos/UCU0rIMU3k_AsVA8d6N1B03w.jpg"/>
   </channel>
-  <programme start="20260312184545 +0000" stop="20260312194545 +0000" channel="UCU0rIMU3k_AsVA8d6N1B03w">
-    <title>🔴 LIVE: Tom and Jerry Golden Era Live Stream! | 1940's-1970's | Warner Classics 2026-03-12 18:45</title>
+  <programme start="20260313012943 +0000" stop="20260313022943 +0000" channel="UCU0rIMU3k_AsVA8d6N1B03w">
+    <title>🔴 LIVE: Tom and Jerry Golden Era Live Stream! | 1940's-1970's | Warner Classics 2026-03-13 01:29</title>
     <desc>Live YouTube stream from Warner Bros Classics</desc>
     <category>Live</category>
   </programme>
@@ -31,8 +22,8 @@
     <display-name>Boomerang UK</display-name>
     <icon src="logos/UCmst562fALOY2cKb4IFgqEg.jpg"/>
   </channel>
-  <programme start="20260312184545 +0000" stop="20260312194545 +0000" channel="UCmst562fALOY2cKb4IFgqEg">
-    <title>🔴 LIVE: NEW Tom &amp; Jerry Marathon! Laugh, Learn and Have Fun with Tom and Jerry | Boomerang UK 2026-03-12 18:45</title>
+  <programme start="20260313012943 +0000" stop="20260313022943 +0000" channel="UCmst562fALOY2cKb4IFgqEg">
+    <title>🔴 LIVE: NEW Tom &amp; Jerry Marathon! Laugh, Learn and Have Fun with Tom and Jerry | Boomerang UK 2026-03-13 01:29</title>
     <desc>Live YouTube stream from Boomerang UK</desc>
     <category>Live</category>
   </programme>
@@ -40,8 +31,8 @@
     <display-name>Sun News</display-name>
     <icon src="logos/UCYlh4lH762HvHt6mmiecyWQ.jpg"/>
   </channel>
-  <programme start="20260312184545 +0000" stop="20260312194545 +0000" channel="UCYlh4lH762HvHt6mmiecyWQ">
-    <title>🔴LIVE: Sun News | Gas Cylinder Crisis | Petrol &amp; Diesel | TN Election 2026 | CM MK Stalin 2026-03-12 18:45</title>
+  <programme start="20260313012943 +0000" stop="20260313022943 +0000" channel="UCYlh4lH762HvHt6mmiecyWQ">
+    <title>🔴LIVE: Sun News | Gas Cylinder Crisis | Petrol &amp; Diesel | TN Election 2026 | CM MK Stalin 2026-03-13 01:29</title>
     <desc>Live YouTube stream from Sun News</desc>
     <category>Live</category>
   </programme>
