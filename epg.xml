@@ -1,29 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tv generator-info-name="YouTube Live EPG Generator" date="20260313144816 ">
+<tv generator-info-name="YouTube Live EPG Generator" date="20260313183446 ">
   <channel id="UCmHCyBKDCQk5GwJB3NvTbdw">
     <display-name>Sports TV</display-name>
     <icon src="logos/UCmHCyBKDCQk5GwJB3NvTbdw.jpg"/>
   </channel>
-  <programme start="20260313144816 +0000" stop="20260313154816 +0000" channel="UCmHCyBKDCQk5GwJB3NvTbdw">
-    <title>🔴 - 𝐑𝐄𝐋𝐈𝐕𝐄 | Multan Sultans vs Karachi Kings |  Match 20 2026-03-13 14:47</title>
+  <programme start="20260313183446 +0000" stop="20260313193446 +0000" channel="UCmHCyBKDCQk5GwJB3NvTbdw">
+    <title>LIVE | Bahawalpur Region - Lahore Region Whites  | Match 14 | ABS Developers National T20 Cup | 2026 2026-03-13 18:34</title>
     <desc>Live YouTube stream from Sports TV</desc>
-    <category>Live</category>
-  </programme>
-  <channel id="UC64at48rIDPKiFPKjPb9SBA">
-    <display-name>Legends League Cricket</display-name>
-    <icon src="logos/UC64at48rIDPKiFPKjPb9SBA.jpg"/>
-  </channel>
-  <programme start="20260313144816 +0000" stop="20260313154816 +0000" channel="UC64at48rIDPKiFPKjPb9SBA">
-    <title>Live Match 3 : Konark Suryas VS India Captains | Legends League Cricket 4.0 2026-03-13 14:47</title>
-    <desc>Live YouTube stream from Legends League Cricket</desc>
     <category>Live</category>
   </programme>
   <channel id="UCU0rIMU3k_AsVA8d6N1B03w">
     <display-name>Warner Bros Classics</display-name>
     <icon src="logos/UCU0rIMU3k_AsVA8d6N1B03w.jpg"/>
   </channel>
-  <programme start="20260313144816 +0000" stop="20260313154816 +0000" channel="UCU0rIMU3k_AsVA8d6N1B03w">
-    <title>🔴 LIVE: Tom and Jerry Golden Era Live Stream! | 1940's-1970's | Warner Classics 2026-03-13 14:48</title>
+  <programme start="20260313183446 +0000" stop="20260313193446 +0000" channel="UCU0rIMU3k_AsVA8d6N1B03w">
+    <title>🔴 LIVE: Tom and Jerry Golden Era Live Stream! | 1940's-1970's | Warner Classics 2026-03-13 18:34</title>
     <desc>Live YouTube stream from Warner Bros Classics</desc>
     <category>Live</category>
   </programme>
@@ -31,8 +22,8 @@
     <display-name>Sun News</display-name>
     <icon src="logos/UCYlh4lH762HvHt6mmiecyWQ.jpg"/>
   </channel>
-  <programme start="20260313144816 +0000" stop="20260313154816 +0000" channel="UCYlh4lH762HvHt6mmiecyWQ">
-    <title>🔴LIVE : பா.விஜய் பங்கேற்கும் முதலமைச்சர் மு.க.ஸ்டாலின் பிறந்தநாள் விழா! | CM Stalin | Sunnews 2026-03-13 14:48</title>
+  <programme start="20260313183446 +0000" stop="20260313193446 +0000" channel="UCYlh4lH762HvHt6mmiecyWQ">
+    <title>🔴LIVE: Sun News | Gas Cylinder Crisis | Petrol &amp; Diesel | TN Election 2026 | CM MK Stalin 2026-03-13 18:34</title>
     <desc>Live YouTube stream from Sun News</desc>
     <category>Live</category>
   </programme>
