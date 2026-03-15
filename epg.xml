@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tv generator-info-name="YouTube Live EPG Generator" date="20260314183054 ">
+<tv generator-info-name="YouTube Live EPG Generator" date="20260315014340 ">
   <channel id="UCmHCyBKDCQk5GwJB3NvTbdw">
     <display-name>Sports TV</display-name>
     <icon src="logos/UCmHCyBKDCQk5GwJB3NvTbdw.jpg"/>
   </channel>
-  <programme start="20260314183054 +0000" stop="20260314193054 +0000" channel="UCmHCyBKDCQk5GwJB3NvTbdw">
-    <title>LIVE | Lahore Region vs Karachi Region | Match 16 | ABS Developers National T20 Cup | 2026 2026-03-14 18:30</title>
+  <programme start="20260315014340 +0000" stop="20260315024340 +0000" channel="UCmHCyBKDCQk5GwJB3NvTbdw">
+    <title>🔴 - 𝐑𝐄𝐋𝐈𝐕𝐄 | Lahore Qalandars vs Quetta Gladiators | Match 21| M3O1J 2026-03-15 01:43</title>
     <desc>Live YouTube stream from Sports TV</desc>
     <category>Live</category>
   </programme>
@@ -13,8 +13,8 @@
     <display-name>Warner Bros Classics</display-name>
     <icon src="logos/UCU0rIMU3k_AsVA8d6N1B03w.jpg"/>
   </channel>
-  <programme start="20260314183054 +0000" stop="20260314193054 +0000" channel="UCU0rIMU3k_AsVA8d6N1B03w">
-    <title>🔴 LIVE: Tom and Jerry Golden Era Live Stream! | 1940's-1970's | Warner Classics 2026-03-14 18:30</title>
+  <programme start="20260315014340 +0000" stop="20260315024340 +0000" channel="UCU0rIMU3k_AsVA8d6N1B03w">
+    <title>🔴 LIVE: Tom and Jerry Golden Era Live Stream! | 1940's-1970's | Warner Classics 2026-03-15 01:43</title>
     <desc>Live YouTube stream from Warner Bros Classics</desc>
     <category>Live</category>
   </programme>
@@ -22,8 +22,8 @@
     <display-name>Sun News</display-name>
     <icon src="logos/UCYlh4lH762HvHt6mmiecyWQ.jpg"/>
   </channel>
-  <programme start="20260314183054 +0000" stop="20260314193054 +0000" channel="UCYlh4lH762HvHt6mmiecyWQ">
-    <title>🔴LIVE: Sun News | Gas Cylinder Crisis | Petrol &amp; Diesel | TN Election 2026 | CM MK Stalin 2026-03-14 18:30</title>
+  <programme start="20260315014340 +0000" stop="20260315024340 +0000" channel="UCYlh4lH762HvHt6mmiecyWQ">
+    <title>🔴LIVE: Sun News | Gas Cylinder Crisis | Petrol &amp; Diesel | TN Election 2026 | CM MK Stalin 2026-03-15 01:43</title>
     <desc>Live YouTube stream from Sun News</desc>
     <category>Live</category>
   </programme>
