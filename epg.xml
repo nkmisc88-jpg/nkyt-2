@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tv generator-info-name="YouTube Live EPG Generator" date="20260317125951 ">
+<tv generator-info-name="YouTube Live EPG Generator" date="20260317185510 ">
   <channel id="UCmHCyBKDCQk5GwJB3NvTbdw">
     <display-name>Sports TV</display-name>
     <icon src="logos/UCmHCyBKDCQk5GwJB3NvTbdw.jpg"/>
   </channel>
-  <programme start="20260317125951 +0000" stop="20260317135951 +0000" channel="UCmHCyBKDCQk5GwJB3NvTbdw">
-    <title>🔴 - 𝐑𝐄𝐋𝐈𝐕𝐄 | Lahore Qalandars vs Karachi Kings | Match 24 2026-03-17 12:59</title>
+  <programme start="20260317185510 +0000" stop="20260317195510 +0000" channel="UCmHCyBKDCQk5GwJB3NvTbdw">
+    <title>🔴 - 𝐑𝐄𝐋𝐈𝐕𝐄 | Multan Sultans vs Peshawar Zalmi | Match 25 2026-03-17 18:54</title>
     <desc>Live YouTube stream from Sports TV</desc>
     <category>Live</category>
   </programme>
@@ -13,8 +13,8 @@
     <display-name>Warner Bros Classics</display-name>
     <icon src="logos/UCU0rIMU3k_AsVA8d6N1B03w.jpg"/>
   </channel>
-  <programme start="20260317125951 +0000" stop="20260317135951 +0000" channel="UCU0rIMU3k_AsVA8d6N1B03w">
-    <title>🔴 LIVE: Tom and Jerry Golden Era Live Stream! | 1940's-1970's | Warner Classics 2026-03-17 12:59</title>
+  <programme start="20260317185510 +0000" stop="20260317195510 +0000" channel="UCU0rIMU3k_AsVA8d6N1B03w">
+    <title>🔴 LIVE: Tom and Jerry Golden Era Live Stream! | 1940's-1970's | Warner Classics 2026-03-17 18:54</title>
     <desc>Live YouTube stream from Warner Bros Classics</desc>
     <category>Live</category>
   </programme>
@@ -22,8 +22,8 @@
     <display-name>Sun News</display-name>
     <icon src="logos/UCYlh4lH762HvHt6mmiecyWQ.jpg"/>
   </channel>
-  <programme start="20260317125951 +0000" stop="20260317135951 +0000" channel="UCYlh4lH762HvHt6mmiecyWQ">
-    <title>🔴LIVE : ஓ பன்னீர் செல்வம் பேச்சு | O Panneerselvam Speech | TN Election 2026 | Sun News 2026-03-17 12:59</title>
+  <programme start="20260317185510 +0000" stop="20260317195510 +0000" channel="UCYlh4lH762HvHt6mmiecyWQ">
+    <title>🔴LIVE : Aadhav Arjuna Speech | TVK Vijay | TN Election 2026 | Delhi | Sun News 2026-03-17 18:55</title>
     <desc>Live YouTube stream from Sun News</desc>
     <category>Live</category>
   </programme>
