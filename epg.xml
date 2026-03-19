@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tv generator-info-name="YouTube Live EPG Generator" date="20260319014817 ">
+<tv generator-info-name="YouTube Live EPG Generator" date="20260319065237 ">
   <channel id="UCmHCyBKDCQk5GwJB3NvTbdw">
     <display-name>Sports TV</display-name>
     <icon src="logos/UCmHCyBKDCQk5GwJB3NvTbdw.jpg"/>
   </channel>
-  <programme start="20260319014817 +0000" stop="20260319024817 +0000" channel="UCmHCyBKDCQk5GwJB3NvTbdw">
-    <title>🔴 - 𝐑𝐄𝐋𝐈𝐕𝐄 | Peshawar Zalmi vs Karachi Kings | Match 27 2026-03-19 01:47</title>
+  <programme start="20260319065237 +0000" stop="20260319075237 +0000" channel="UCmHCyBKDCQk5GwJB3NvTbdw">
+    <title>🔴 - 𝐑𝐄𝐋𝐈𝐕𝐄 | Peshawar Zalmi vs Karachi Kings | Match 27 2026-03-19 06:52</title>
     <desc>Live YouTube stream from Sports TV</desc>
     <category>Live</category>
   </programme>
@@ -13,26 +13,17 @@
     <display-name>Warner Bros Classics</display-name>
     <icon src="logos/UCU0rIMU3k_AsVA8d6N1B03w.jpg"/>
   </channel>
-  <programme start="20260319014817 +0000" stop="20260319024817 +0000" channel="UCU0rIMU3k_AsVA8d6N1B03w">
-    <title>🔴 LIVE: Tom and Jerry Golden Era Live Stream! | 1940's-1970's | Warner Classics 2026-03-19 01:48</title>
+  <programme start="20260319065237 +0000" stop="20260319075237 +0000" channel="UCU0rIMU3k_AsVA8d6N1B03w">
+    <title>🔴 LIVE: Tom and Jerry Golden Era Live Stream! | 1940's-1970's | Warner Classics 2026-03-19 06:52</title>
     <desc>Live YouTube stream from Warner Bros Classics</desc>
-    <category>Live</category>
-  </programme>
-  <channel id="UCuKowzPg2-A0FcmyPa3yWug">
-    <display-name>New Zealand Cricket</display-name>
-    <icon src="logos/UCuKowzPg2-A0FcmyPa3yWug.jpg"/>
-  </channel>
-  <programme start="20260319014817 +0000" stop="20260319024817 +0000" channel="UCuKowzPg2-A0FcmyPa3yWug">
-    <title>DAY 2 LIVE | Wellington Firebirds v Auckland Aces - Plunket Shield 2026-03-19 01:48</title>
-    <desc>Live YouTube stream from New Zealand Cricket</desc>
     <category>Live</category>
   </programme>
   <channel id="UCYlh4lH762HvHt6mmiecyWQ">
     <display-name>Sun News</display-name>
     <icon src="logos/UCYlh4lH762HvHt6mmiecyWQ.jpg"/>
   </channel>
-  <programme start="20260319014817 +0000" stop="20260319024817 +0000" channel="UCYlh4lH762HvHt6mmiecyWQ">
-    <title>🔴LIVE: Headlines | தலைப்புச் செய்திகள் - 19.03.2026 | Today Headlines | Sun news 2026-03-19 01:48</title>
+  <programme start="20260319065237 +0000" stop="20260319075237 +0000" channel="UCYlh4lH762HvHt6mmiecyWQ">
+    <title>🔴LIVE : நாம் தமிழர் கட்சியின் தேர்தல் அறிக்கையை வெளியிடுகிறார் சீமான் | NTK | Seeman | Sun News 2026-03-19 06:52</title>
     <desc>Live YouTube stream from Sun News</desc>
     <category>Live</category>
   </programme>
