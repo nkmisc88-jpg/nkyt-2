@@ -1,13 +1,19 @@
 #EXTM3U
 #EXT-X-VERSION:3
-# Generated: 2026-04-05 12:44:09 UTC
-# Total channels: 0
+# Generated: 2026-04-05 18:41:58 UTC
+# Total channels: 2
 # Individual channels: https://uticap.github.io/Youtube-to-M3u8/channels/
 
+#EXTINF:-1 tvg-id="UCU0rIMU3k_AsVA8d6N1B03w" tvg-logo="logos/UCU0rIMU3k_AsVA8d6N1B03w.jpg" tvg-name="Warner Bros Classics" group-title="General",Warner Bros Classics [Mobile]
+https://manifest.googlevideo.com/api/manifest/hls_playlist/expire/1775436094/ei/3qzSaYezJdPJ8wLA8N-JCw/ip/2a09:bac5:6194:1846::26b:b8/id/400k2SKoeh4.2/itag/94/source/yt_live_broadcast/requiressl/yes/ratebypass/yes/live/1/sgoap/gir%3Dyes%3Bitag%3D140/sgovp/gir%3Dyes%3Bitag%3D135/rqh/1/hls_chunk_host/rr11---sn-qja5m5-5g.googlevideo.com/xpc/EgVo2aDSNQ%3D%3D/playlist_duration/30/manifest_duration/30/ss/1/ssa/1/bui/AUUZDGIbD51QPFbL5LftaB4ru9-qWTEgONvxY48dMGeVBTGK22Jy92ctX3PWZ0n6-wULoB3XYqi2Y6yG/spc/jlWavTMBKX0Isjyk_wDDECfS2HoGqrrbX3r9XsqqGClS5jggAzUpogFtDMyHNd-2/vprv/1/reg/0/playlist_type/DVR/met/1775414495,/mh/Ss/mm/44/mn/sn-qja5m5-5g/ms/lva/mv/u/mvi/11/pl/35/rms/lva,lva/dover/11/pacing/0/keepalive/yes/fexp/51565115,51565682/mt/1775414360/sparams/expire,ei,ip,id,itag,source,requiressl,ratebypass,live,sgoap,sgovp,rqh,xpc,playlist_duration,manifest_duration,ss,ssa,bui,spc,vprv,reg,playlist_type/sig/AHEqNM4wRgIhAJYy1ymJIRIiN2vIGOq4y_FS5Br-UKkplL1YdTxn4X6uAiEAqGgX50s9eSxdJkmRMNrOlwaLgFzvdggUGF4UefcMP-8%3D/lsparams/hls_chunk_host,met,mh,mm,mn,ms,mv,mvi,pl,rms/lsig/APaTxxMwRQIgM2PNNFvMvwDer4i8wnkpf_e5Ol7HCs00j0c2_verhbwCIQCGqtuTno5RCg-q7Lv6cFrPXTaHNBjnTmHxbY4awICRUg%3D%3D/playlist/index.m3u8
 
-# Summary: 0/0 streams active
-# Quality: 0x1080p, 0x720p, 0x480p
-# Categories: 
-# Countries: 
+#EXTINF:-1 tvg-id="UCYlh4lH762HvHt6mmiecyWQ" tvg-logo="logos/UCYlh4lH762HvHt6mmiecyWQ.jpg" tvg-name="Sun News" group-title="News",Sun News [Mobile]
+https://manifest.googlevideo.com/api/manifest/hls_playlist/expire/1775436117/ei/9azSadeIK7PP4dUPma2IwQY/ip/2a09:bac5:6194:1846::26b:b8/id/9M02G5c6x6w.4/itag/94/source/yt_live_broadcast/requiressl/yes/ratebypass/yes/live/1/sgoap/gir%3Dyes%3Bitag%3D140/sgovp/gir%3Dyes%3Bitag%3D135/rqh/1/hls_chunk_host/rr6---sn-qja5m5-5g.googlevideo.com/xpc/EgVo2aDSNQ%3D%3D/playlist_duration/30/manifest_duration/30/ss/1/ssa/1/bui/AUUZDGIy7-sgrs0Lh6YOjUz05Adn0FyiyKMNFKs1osdvWtBHnB2CEISR5D6NXfD-ZV9TiqKDtfgSyFyh/spc/jlWavWOQ_-lt45p5_FULGw060Dg4XKsyUXPhG9z-yqcM2FWRi5Wk-qh5ja8pCGin/vprv/1/reg/0/playlist_type/DVR/met/1775414518,/mh/6r/mm/44/mn/sn-qja5m5-5g/ms/lva/mv/u/mvi/6/pl/35/rms/lva,lva/dover/11/pacing/0/keepalive/yes/fexp/51565115,51565682/mt/1775414360/sparams/expire,ei,ip,id,itag,source,requiressl,ratebypass,live,sgoap,sgovp,rqh,xpc,playlist_duration,manifest_duration,ss,ssa,bui,spc,vprv,reg,playlist_type/sig/AHEqNM4wRgIhAOIlct8z2gPvVjXyMVEdjDx9YT6W-1KAALBkVVdZvUs4AiEAtubt0TzYZ5efcvaAOmH1lk8a5pqwnl-y0Z9706zSzk0%3D/lsparams/hls_chunk_host,met,mh,mm,mn,ms,mv,mvi,pl,rms/lsig/APaTxxMwRQIgI2V00Qx5sxdxesg5yC3i8Y3kPl03oOBH_boY8E3-mTsCIQDoePl2r5YdYqPJ_8sdx38CimyFmW90h4XphkCc5vTHUw%3D%3D/playlist/index.m3u8
+
+
+# Summary: 2/2 streams active
+# Quality: 2x1080p, 0x720p, 0x480p
+# Categories: General:1, News:1
+# Countries: US:2
 # Individual channels: https://uticap.github.io/Youtube-to-M3u8/channels/
-# Updated: 2026-04-05 12:44:09 UTC
+# Updated: 2026-04-05 18:41:58 UTC

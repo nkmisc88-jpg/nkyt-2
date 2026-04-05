@@ -1,2 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tv generator-info-name="YouTube Live EPG Generator" date="20260405124409 "/>
+<tv generator-info-name="YouTube Live EPG Generator" date="20260405184158 ">
+  <channel id="UCU0rIMU3k_AsVA8d6N1B03w">
+    <display-name>Warner Bros Classics</display-name>
+    <icon src="logos/UCU0rIMU3k_AsVA8d6N1B03w.jpg"/>
+  </channel>
+  <programme start="20260405184158 +0000" stop="20260405194158 +0000" channel="UCU0rIMU3k_AsVA8d6N1B03w">
+    <title>🔴 LIVE: Tom and Jerry Golden Era Live Stream! | 1940's-1970's | Warner Classics 2026-04-05 18:41</title>
+    <desc>Live YouTube stream from Warner Bros Classics</desc>
+    <category>Live</category>
+  </programme>
+  <channel id="UCYlh4lH762HvHt6mmiecyWQ">
+    <display-name>Sun News</display-name>
+    <icon src="logos/UCYlh4lH762HvHt6mmiecyWQ.jpg"/>
+  </channel>
+  <programme start="20260405184158 +0000" stop="20260405194158 +0000" channel="UCYlh4lH762HvHt6mmiecyWQ">
+    <title>🔴LIVE: Sun News | TN Election 2026 | Gas Cylinder Crisis | CM MK Stalin | Latest News | DMK | ADMK 2026-04-05 18:41</title>
+    <desc>Live YouTube stream from Sun News</desc>
+    <category>Live</category>
+  </programme>
+</tv>
