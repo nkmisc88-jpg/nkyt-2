@@ -4,7 +4,7 @@ run-name: Generate HD Playlist with Smart Quality Selection 🎬
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */6 * * *'  # Refresh every 6 hours
+    - cron: '0 */1 * * *'  # Refresh every 1 hours
   push:
     paths:
       - 'streams.txt'
