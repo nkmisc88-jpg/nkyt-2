@@ -2,7 +2,7 @@ import requests
 import json
 
 def generate_m3u():
-    url = "https://zstar.pfy.workers.dev"
+    url = "https://raw.githubusercontent.com/sptvhelpdesk-ship-it/jstar-aoi/refs/heads/main/channels.json"
     output_file = "playlist.m3u"
 
     try:
