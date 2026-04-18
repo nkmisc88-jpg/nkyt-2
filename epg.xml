@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tv generator-info-name="YouTube Live EPG Generator" date="20260418113642 ">
+<tv generator-info-name="YouTube Live EPG Generator" date="20260418130618 ">
   <channel id="UCmHCyBKDCQk5GwJB3NvTbdw">
     <display-name>Sports TV</display-name>
     <icon src="logos/UCmHCyBKDCQk5GwJB3NvTbdw.jpg"/>
   </channel>
-  <programme start="20260418113642 +0000" stop="20260418123642 +0000" channel="UCmHCyBKDCQk5GwJB3NvTbdw">
-    <title>𝐋𝐈𝐕𝐄 | Quetta Gladiators vs Peshawar Zalmi  |  Match 17 2026-04-18 11:36</title>
+  <programme start="20260418130618 +0000" stop="20260418140618 +0000" channel="UCmHCyBKDCQk5GwJB3NvTbdw">
+    <title>𝐋𝐈𝐕𝐄 | Quetta Gladiators vs Peshawar Zalmi  |  Match 17 2026-04-18 13:05</title>
     <desc>Live YouTube stream from Sports TV</desc>
     <category>Live</category>
   </programme>
@@ -13,26 +13,17 @@
     <display-name>Warner Bros Classics</display-name>
     <icon src="logos/UCU0rIMU3k_AsVA8d6N1B03w.jpg"/>
   </channel>
-  <programme start="20260418113642 +0000" stop="20260418123642 +0000" channel="UCU0rIMU3k_AsVA8d6N1B03w">
-    <title>🔴 LIVE: Tom and Jerry Golden Era Live Stream! | 1940's-1970's | Warner Classics 2026-04-18 11:36</title>
+  <programme start="20260418130618 +0000" stop="20260418140618 +0000" channel="UCU0rIMU3k_AsVA8d6N1B03w">
+    <title>🔴 LIVE: Tom and Jerry Golden Era Live Stream! | 1940's-1970's | Warner Classics 2026-04-18 13:06</title>
     <desc>Live YouTube stream from Warner Bros Classics</desc>
-    <category>Live</category>
-  </programme>
-  <channel id="UC2naOExy27J5Qz3SO-w6xkQ">
-    <display-name>Cricket Australia</display-name>
-    <icon src="logos/UC2naOExy27J5Qz3SO-w6xkQ.jpg"/>
-  </channel>
-  <programme start="20260418113642 +0000" stop="20260418123642 +0000" channel="UC2naOExy27J5Qz3SO-w6xkQ">
-    <title>New South Wales Indigenous (Male) v PNG Barramundi's (Male) 2026-04-18 11:36</title>
-    <desc>Live YouTube stream from Cricket Australia</desc>
     <category>Live</category>
   </programme>
   <channel id="UCYlh4lH762HvHt6mmiecyWQ">
     <display-name>Sun News</display-name>
     <icon src="logos/UCYlh4lH762HvHt6mmiecyWQ.jpg"/>
   </channel>
-  <programme start="20260418113642 +0000" stop="20260418123642 +0000" channel="UCYlh4lH762HvHt6mmiecyWQ">
-    <title>🔴LIVE : உதயநிதி ஸ்டாலின் பரப்புரை! | DMK | Cm Stalin | சங்ககிரி | திரு.மு.மணிகண்டன் | Sun News 2026-04-18 11:36</title>
+  <programme start="20260418130618 +0000" stop="20260418140618 +0000" channel="UCYlh4lH762HvHt6mmiecyWQ">
+    <title>🔴LIVE : NDA பொதுக்கூட்டம்.. | தமிழகத்தில் பிரதமர் மோடி | PM Modi in TN | BJP | EPS | ADMK | TTV 2026-04-18 13:06</title>
     <desc>Live YouTube stream from Sun News</desc>
     <category>Live</category>
   </programme>
