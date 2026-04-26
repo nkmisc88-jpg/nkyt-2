@@ -1,13 +1,22 @@
 #EXTM3U
 #EXT-X-VERSION:3
-# Generated: 2026-04-26 15:43:52 UTC
-# Total channels: 0
+# Generated: 2026-04-26 16:45:26 UTC
+# Total channels: 3
 # Individual channels: https://uticap.github.io/Youtube-to-M3u8/channels/
 
+#EXTINF:-1 tvg-id="UCmHCyBKDCQk5GwJB3NvTbdw" tvg-logo="logos/UCmHCyBKDCQk5GwJB3NvTbdw.jpg" tvg-name="Sports TV" group-title="Sports",Sports TV [1080p]
+https://manifest.googlevideo.com/api/manifest/hls_playlist/expire/1777243500/ei/DEHuaeGNGp6LsfIPxNKN6QI/ip/2a09:bac5:6197:183c::26a:3c/id/RmtB2ZZs2OE.1/itag/96/source/yt_live_broadcast/requiressl/yes/ratebypass/yes/live/1/sgoap/gir%3Dyes%3Bitag%3D140/sgovp/gir%3Dyes%3Bitag%3D137/rqh/1/hls_chunk_host/rr7---sn-ojn4v5-5w.googlevideo.com/xpc/EgVo2aDSNQ%3D%3D/playlist_duration/30/manifest_duration/30/ss/1/ssa/1/bui/AUUZDGJYHDEEBrRmdnhUBuYoqK7Q0kMEhShwHekBIM-amxg4t3ePRyCOO31UT-3_VFUgPO3D_b_kSpc1/spc/jlWavcOvbU-HBTGBv1AI0RWhuva-R5QPYzDefa1OZwWADHvH_encgmdGVYE9rWl1/vprv/1/reg/0/playlist_type/DVR/initcwndbps/2463750/met/1777221900,/mh/QA/mm/44/mn/sn-ojn4v5-5w/ms/lva/mv/m/mvi/7/pl/35/rms/lva,lva/dover/11/pacing/0/keepalive/yes/fexp/51565115,51565681/mt/1777221389/sparams/expire,ei,ip,id,itag,source,requiressl,ratebypass,live,sgoap,sgovp,rqh,xpc,playlist_duration,manifest_duration,ss,ssa,bui,spc,vprv,reg,playlist_type/sig/AHEqNM4wRgIhAJ7Z-M8gbifoByL5-lMU7wwvjhqlPExg9QEJUsUJlq_bAiEA8_Eiuueg4DTN8wUY9umj_Ev5RdWvdkne091d90ZWCY8%3D/lsparams/hls_chunk_host,initcwndbps,met,mh,mm,mn,ms,mv,mvi,pl,rms/lsig/APaTxxMwRQIhAP4DdT20rziFJer92JVDlLM-Dj2k--Acb_v8q9H_ZaASAiAlZIJDj-YgC2h9fZW_wNR0K3l-6SQOWtZI97FoVEbfsg%3D%3D/playlist/index.m3u8
 
-# Summary: 0/0 streams active
-# Quality: 0x1080p, 0x720p, 0x480p
-# Categories: 
-# Countries: 
+#EXTINF:-1 tvg-id="UCU0rIMU3k_AsVA8d6N1B03w" tvg-logo="logos/UCU0rIMU3k_AsVA8d6N1B03w.jpg" tvg-name="Warner Bros Classics" group-title="General",Warner Bros Classics [1080p]
+https://manifest.googlevideo.com/api/manifest/hls_playlist/expire/1777243511/ei/F0HuafXPD-qfsfIP1szpoQ0/ip/2a09:bac5:6197:183c::26a:3c/id/400k2SKoeh4.2/itag/96/source/yt_live_broadcast/requiressl/yes/ratebypass/yes/live/1/sgoap/gir%3Dyes%3Bitag%3D140/sgovp/gir%3Dyes%3Bitag%3D137/rqh/1/hls_chunk_host/rr14---sn-ojn4v5-5w.googlevideo.com/xpc/EgVo2aDSNQ%3D%3D/playlist_duration/30/manifest_duration/30/ss/1/ssa/1/bui/AUUZDGKojCcFXThdi6HBwLsMGDr1qO04ki9aoxk5VwZ-DAVcTK41qsCCQiPwQN5YnrcaSr25688xhoX3/spc/jlWavUcVsJD3UT5lhiSfwfyZLBRht3rIO__KZPt9g1opSa7av9HE89VKWlODMR47/vprv/1/reg/0/playlist_type/DVR/initcwndbps/2463750/met/1777221911,/mh/Ss/mm/44/mn/sn-ojn4v5-5w/ms/lva/mv/m/mvi/14/pl/35/rms/lva,lva/dover/11/pacing/0/keepalive/yes/fexp/51565115,51565682/mt/1777221389/sparams/expire,ei,ip,id,itag,source,requiressl,ratebypass,live,sgoap,sgovp,rqh,xpc,playlist_duration,manifest_duration,ss,ssa,bui,spc,vprv,reg,playlist_type/sig/AHEqNM4wRQIgSm5qDMiGfoekJrxUo4JoZruf6y2mai6peYSHjaEcB4gCIQDgZhsmeRZTeD6f6ZIEaNDJqRTp9Xzm-vjnyFfnjbhYsw%3D%3D/lsparams/hls_chunk_host,initcwndbps,met,mh,mm,mn,ms,mv,mvi,pl,rms/lsig/APaTxxMwRAIgegSuwmdDa-ynI3aZLRdu5K5Q2CfCICi5Cbyl6_QM4UoCIHPYQfan4oAyWCOvpQPubGAUdBqEpyDF5_4ecAAABFaN/playlist/index.m3u8
+
+#EXTINF:-1 tvg-id="UCYlh4lH762HvHt6mmiecyWQ" tvg-logo="logos/UCYlh4lH762HvHt6mmiecyWQ.jpg" tvg-name="Sun News" group-title="News",Sun News [1080p]
+https://manifest.googlevideo.com/api/manifest/hls_playlist/expire/1777243526/ei/JkHuae24C_LSsfIP-fLj0Qk/ip/2a09:bac5:6197:183c::26a:3c/id/9M02G5c6x6w.4/itag/96/source/yt_live_broadcast/requiressl/yes/ratebypass/yes/live/1/sgoap/gir%3Dyes%3Bitag%3D140/sgovp/gir%3Dyes%3Bitag%3D137/rqh/1/hls_chunk_host/rr5---sn-ojn4v5-5w.googlevideo.com/xpc/EgVo2aDSNQ%3D%3D/playlist_duration/30/manifest_duration/30/ss/1/ssa/1/bui/AUUZDGK0-zrY-05OGthdaLwiKUYu6S_C5mlHL9MEDp_KFXdzaP97M5m_DanrfGbMcYZ9aGerGZhdq6wj/spc/jlWavWgLNY2BIOGSYB9lRASqmFjvWqYfVW2s3xy4bKRtCTg-kxbqzSpxfKfIiAkN/vprv/1/reg/0/playlist_type/DVR/met/1777221926,/mh/6r/mm/44/mn/sn-ojn4v5-5w/ms/lva/mv/u/mvi/5/pl/35/rms/lva,lva/dover/11/pacing/0/keepalive/yes/fexp/51565116,51565682/mt/1777221747/sparams/expire,ei,ip,id,itag,source,requiressl,ratebypass,live,sgoap,sgovp,rqh,xpc,playlist_duration,manifest_duration,ss,ssa,bui,spc,vprv,reg,playlist_type/sig/AHEqNM4wRQIgTleMsnhxlSardtEd70vLHvRH1nHtneNZCGApUQEr6xUCIQDRRWU1dl6kDgJ1S7-V475FqMGKZyLTYImY-uRc4himiA%3D%3D/lsparams/hls_chunk_host,met,mh,mm,mn,ms,mv,mvi,pl,rms/lsig/APaTxxMwRQIhAIbfcZg76WiTFRhEnhS0nr2yh06tAn8ntJ1T-9-s5N6MAiBbeE__f9rhRwGYKqpl_87Jh6C6j2iTECbtt0PtNavw7Q%3D%3D/playlist/index.m3u8
+
+
+# Summary: 3/3 streams active
+# Quality: 3x1080p, 0x720p, 0x480p
+# Categories: Sports:1, General:1, News:1
+# Countries: US:3
 # Individual channels: https://uticap.github.io/Youtube-to-M3u8/channels/
-# Updated: 2026-04-26 15:43:52 UTC
+# Updated: 2026-04-26 16:45:26 UTC
