@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tv generator-info-name="YouTube Live EPG Generator" date="20260429091044 ">
+<tv generator-info-name="YouTube Live EPG Generator" date="20260429113921 ">
   <channel id="UCmHCyBKDCQk5GwJB3NvTbdw">
     <display-name>Sports TV</display-name>
     <icon src="logos/UCmHCyBKDCQk5GwJB3NvTbdw.jpg"/>
   </channel>
-  <programme start="20260429091044 +0000" stop="20260429101044 +0000" channel="UCmHCyBKDCQk5GwJB3NvTbdw">
-    <title>LIVE | Bangladesh Vs New Zealand |  T20I Series | Match 2  | M9G1U 2026-04-29 09:10</title>
+  <programme start="20260429113921 +0000" stop="20260429123921 +0000" channel="UCmHCyBKDCQk5GwJB3NvTbdw">
+    <title>Live | Islamabad Region vs Faisalabad Region | National Under-17 Cup 2025-26 | Day 02 | MZD1T 2026-04-29 11:38</title>
     <desc>Live YouTube stream from Sports TV</desc>
     <category>Live</category>
   </programme>
@@ -13,8 +13,8 @@
     <display-name>Warner Bros Classics</display-name>
     <icon src="logos/UCU0rIMU3k_AsVA8d6N1B03w.jpg"/>
   </channel>
-  <programme start="20260429091044 +0000" stop="20260429101044 +0000" channel="UCU0rIMU3k_AsVA8d6N1B03w">
-    <title>🔴 LIVE: Tom and Jerry Golden Era Live Stream! | 1940's-1970's | Warner Classics 2026-04-29 09:10</title>
+  <programme start="20260429113921 +0000" stop="20260429123921 +0000" channel="UCU0rIMU3k_AsVA8d6N1B03w">
+    <title>🔴 LIVE: Tom and Jerry Golden Era Live Stream! | 1940's-1970's | Warner Classics 2026-04-29 11:39</title>
     <desc>Live YouTube stream from Warner Bros Classics</desc>
     <category>Live</category>
   </programme>
@@ -22,8 +22,8 @@
     <display-name>Sun News</display-name>
     <icon src="logos/UCYlh4lH762HvHt6mmiecyWQ.jpg"/>
   </channel>
-  <programme start="20260429091044 +0000" stop="20260429101044 +0000" channel="UCYlh4lH762HvHt6mmiecyWQ">
-    <title>🔴LIVE : 30 முதன்மைச் செய்திகள் | Headlines | Express News | Tamil Nadu News | 29.04.2026 | Sun News 2026-04-29 09:10</title>
+  <programme start="20260429113921 +0000" stop="20260429123921 +0000" channel="UCYlh4lH762HvHt6mmiecyWQ">
+    <title>🔴LIVE : 30 முதன்மைச் செய்திகள் | Headlines | Express News | Tamil Nadu News | 29.04.2026 | Sun News 2026-04-29 11:39</title>
     <desc>Live YouTube stream from Sun News</desc>
     <category>Live</category>
   </programme>
