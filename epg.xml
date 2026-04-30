@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tv generator-info-name="YouTube Live EPG Generator" date="20260430062908 ">
+<tv generator-info-name="YouTube Live EPG Generator" date="20260430112952 ">
+  <channel id="UCkBY0aHJP9BwjZLDYxAQrKg">
+    <display-name>cricketcomau</display-name>
+    <icon src="logos/UCkBY0aHJP9BwjZLDYxAQrKg.jpg"/>
+  </channel>
+  <programme start="20260430112952 +0000" stop="20260430122952 +0000" channel="UCkBY0aHJP9BwjZLDYxAQrKg">
+    <title>Cricket Gold - 24/7 LIVE Channel 2026-04-30 11:29</title>
+    <desc>Live YouTube stream from cricketcomau</desc>
+    <category>Live</category>
+  </programme>
   <channel id="UCmHCyBKDCQk5GwJB3NvTbdw">
     <display-name>Sports TV</display-name>
     <icon src="logos/UCmHCyBKDCQk5GwJB3NvTbdw.jpg"/>
   </channel>
-  <programme start="20260430062908 +0000" stop="20260430072908 +0000" channel="UCmHCyBKDCQk5GwJB3NvTbdw">
-    <title>LIVE | Lahore Qalandars VS Islamabad United | ELIMINATOR 01 | HBLPSL 11 2026-04-30 06:28</title>
+  <programme start="20260430112952 +0000" stop="20260430122952 +0000" channel="UCmHCyBKDCQk5GwJB3NvTbdw">
+    <title>LIVE | Lahore Qalandars VS Islamabad United | ELIMINATOR 01 | HBLPSL 11 2026-04-30 11:29</title>
     <desc>Live YouTube stream from Sports TV</desc>
     <category>Live</category>
   </programme>
@@ -13,8 +22,8 @@
     <display-name>Warner Bros Classics</display-name>
     <icon src="logos/UCU0rIMU3k_AsVA8d6N1B03w.jpg"/>
   </channel>
-  <programme start="20260430062908 +0000" stop="20260430072908 +0000" channel="UCU0rIMU3k_AsVA8d6N1B03w">
-    <title>🔴 LIVE: Tom and Jerry Golden Era Live Stream! | 1940's-1970's | Warner Classics 2026-04-30 06:28</title>
+  <programme start="20260430112952 +0000" stop="20260430122952 +0000" channel="UCU0rIMU3k_AsVA8d6N1B03w">
+    <title>🔴 LIVE: Tom and Jerry Golden Era Live Stream! | 1940's-1970's | Warner Classics 2026-04-30 11:29</title>
     <desc>Live YouTube stream from Warner Bros Classics</desc>
     <category>Live</category>
   </programme>
@@ -22,8 +31,8 @@
     <display-name>Sun News</display-name>
     <icon src="logos/UCYlh4lH762HvHt6mmiecyWQ.jpg"/>
   </channel>
-  <programme start="20260430062908 +0000" stop="20260430072908 +0000" channel="UCYlh4lH762HvHt6mmiecyWQ">
-    <title>🔴LIVE: Sun News | TN Election 2026 | CM Stalin | DMK | ADMK | TVK | NTK | Voting | Polling 2026-04-30 06:29</title>
+  <programme start="20260430112952 +0000" stop="20260430122952 +0000" channel="UCYlh4lH762HvHt6mmiecyWQ">
+    <title>🔴LIVE: மதுரை சித்திரை திருவிழா கள்ளழகர் எதிர்சேவை | Chithirai Thiruvila | Madurai | Sun News 2026-04-30 11:29</title>
     <desc>Live YouTube stream from Sun News</desc>
     <category>Live</category>
   </programme>
